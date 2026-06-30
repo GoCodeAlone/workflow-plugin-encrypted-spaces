@@ -14,3 +14,104 @@ message VerifierConfig {
   string mode = 1;
   bool allow_fake = 2;
 }
+
+message RetentionPolicy {
+  uint32 max_operations = 1;
+  uint64 min_key_epoch = 2;
+  uint64 min_membership_epoch = 3;
+}
+
+message EncryptedOperation {
+  string space_id = 1;
+  string member_id = 2;
+  string device_id = 3;
+  string operation_id = 4;
+  uint64 key_epoch = 5;
+  uint64 membership_epoch = 6;
+  bytes ciphertext = 7;
+  bytes nonce = 8;
+  bytes associated_data = 9;
+  int64 created_at_unix_nano = 10;
+}
+
+message OperationCommitment {
+  string space_id = 1;
+  string operation_id = 2;
+  uint64 sequence = 3;
+  string digest = 4;
+  uint64 key_epoch = 5;
+  uint64 membership_epoch = 6;
+  uint64 ciphertext_size = 7;
+}
+
+message FastForwardCheckpoint {
+  string space_id = 1;
+  uint64 through_sequence = 2;
+  string operation_id = 3;
+  string digest = 4;
+  uint64 key_epoch = 5;
+  uint64 membership_epoch = 6;
+}
+
+message VerificationReport {
+  string operation_id = 1;
+  string digest = 2;
+  bool accepted = 3;
+  bool production_ready = 4;
+  string mode = 5;
+}
+
+message AppendConfig {
+  RetentionPolicy retention = 1;
+  bool allow_fake_verifier = 2;
+}
+
+message AppendInput {
+  EncryptedOperation operation = 1;
+}
+
+message AppendOutput {
+  OperationCommitment commitment = 1;
+  VerificationReport verification = 2;
+}
+
+message FastForwardConfig {}
+
+message FastForwardInput {
+  OperationCommitment commitment = 1;
+  FastForwardCheckpoint checkpoint = 2;
+}
+
+message FastForwardOutput {
+  bool accepted = 1;
+  string status = 2;
+}
+
+message EpochRotateConfig {}
+
+message EpochRotateInput {
+  string space_id = 1;
+  uint64 current_key_epoch = 2;
+  string reason = 3;
+}
+
+message EpochRotateOutput {
+  uint64 key_epoch = 1;
+  string reason = 2;
+}
+
+message MemberUpdateConfig {}
+
+message MemberUpdateInput {
+  string space_id = 1;
+  repeated string members = 2;
+  string member_id = 3;
+  string action = 4;
+  string reason = 5;
+}
+
+message MemberUpdateOutput {
+  uint64 membership_epoch = 1;
+  bool member_allowed = 2;
+  string action = 3;
+}

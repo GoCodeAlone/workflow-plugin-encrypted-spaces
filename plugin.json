@@ -36,14 +36,24 @@
       "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.1.0/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
     }
   ],
-  "stepTypes": [],
+  "stepTypes": [
+    "step.encrypted_space_append",
+    "step.encrypted_space_fast_forward",
+    "step.encrypted_space_epoch_rotate",
+    "step.encrypted_space_member_update"
+  ],
   "capabilities": {
     "configProvider": false,
     "moduleTypes": [
       "encrypted_space.store",
       "encrypted_space.verifier"
     ],
-    "stepTypes": [],
+    "stepTypes": [
+      "step.encrypted_space_append",
+      "step.encrypted_space_fast_forward",
+      "step.encrypted_space_epoch_rotate",
+      "step.encrypted_space_member_update"
+    ],
     "triggerTypes": []
   }
 }

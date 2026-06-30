@@ -39,6 +39,13 @@ var encryptedSpacesModuleTypes = []string{
 	"encrypted_space.verifier",
 }
 
+var encryptedSpacesStepTypes = []string{
+	"step.encrypted_space_append",
+	"step.encrypted_space_fast_forward",
+	"step.encrypted_space_epoch_rotate",
+	"step.encrypted_space_member_update",
+}
+
 // TypedModuleTypes implements sdk.TypedModuleProvider.
 func (p *EncryptedSpacesProvider) TypedModuleTypes() []string {
 	return append([]string(nil), encryptedSpacesModuleTypes...)
@@ -63,11 +70,45 @@ func (p *EncryptedSpacesProvider) CreateTypedModule(typeName, name string, confi
 
 // TypedStepTypes implements sdk.TypedStepProvider.
 func (p *EncryptedSpacesProvider) TypedStepTypes() []string {
-	return nil
+	return append([]string(nil), encryptedSpacesStepTypes...)
 }
 
 // CreateTypedStep implements sdk.TypedStepProvider.
 func (p *EncryptedSpacesProvider) CreateTypedStep(typeName, name string, config *anypb.Any) (sdk.StepInstance, error) {
+	switch typeName {
+	case "step.encrypted_space_append":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.AppendConfig{},
+			&contracts.AppendInput{},
+			ExecuteEncryptedSpaceAppend,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_fast_forward":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.FastForwardConfig{},
+			&contracts.FastForwardInput{},
+			ExecuteEncryptedSpaceFastForward,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_epoch_rotate":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.EpochRotateConfig{},
+			&contracts.EpochRotateInput{},
+			ExecuteEncryptedSpaceEpochRotate,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_member_update":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.MemberUpdateConfig{},
+			&contracts.MemberUpdateInput{},
+			ExecuteEncryptedSpaceMemberUpdate,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	}
 	return nil, fmt.Errorf("%w: step type %q", sdk.ErrTypedContractNotHandled, typeName)
 }
 
@@ -83,6 +124,10 @@ func (p *EncryptedSpacesProvider) ContractRegistry() *pb.ContractRegistry {
 		Contracts: []*pb.ContractDescriptor{
 			moduleContract("encrypted_space.store", pkg+"SpaceStoreConfig"),
 			moduleContract("encrypted_space.verifier", pkg+"VerifierConfig"),
+			stepContract("step.encrypted_space_append", pkg+"AppendConfig", pkg+"AppendInput", pkg+"AppendOutput"),
+			stepContract("step.encrypted_space_fast_forward", pkg+"FastForwardConfig", pkg+"FastForwardInput", pkg+"FastForwardOutput"),
+			stepContract("step.encrypted_space_epoch_rotate", pkg+"EpochRotateConfig", pkg+"EpochRotateInput", pkg+"EpochRotateOutput"),
+			stepContract("step.encrypted_space_member_update", pkg+"MemberUpdateConfig", pkg+"MemberUpdateInput", pkg+"MemberUpdateOutput"),
 		},
 	}
 }
@@ -108,6 +153,17 @@ func moduleContract(moduleType, configMessage string) *pb.ContractDescriptor {
 		Kind:          pb.ContractKind_CONTRACT_KIND_MODULE,
 		ModuleType:    moduleType,
 		ConfigMessage: configMessage,
+		Mode:          pb.ContractMode_CONTRACT_MODE_STRICT_PROTO,
+	}
+}
+
+func stepContract(stepType, configMessage, inputMessage, outputMessage string) *pb.ContractDescriptor {
+	return &pb.ContractDescriptor{
+		Kind:          pb.ContractKind_CONTRACT_KIND_STEP,
+		StepType:      stepType,
+		ConfigMessage: configMessage,
+		InputMessage:  inputMessage,
+		OutputMessage: outputMessage,
 		Mode:          pb.ContractMode_CONTRACT_MODE_STRICT_PROTO,
 	}
 }
