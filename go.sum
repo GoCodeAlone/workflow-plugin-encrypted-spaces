@@ -2,8 +2,8 @@ github.com/BurntSushi/toml v1.6.0 h1:dRaEfpa2VI55EwlIW72hMRHdWouJeRF7TPYhI+AUQjk
 github.com/BurntSushi/toml v1.6.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2lLoLwho=
 github.com/DataDog/datadog-go/v5 v5.8.3 h1:s58CUJ9s8lezjhTNJO/SxkPBv2qZjS3ktpRSqGF5n0s=
 github.com/DataDog/datadog-go/v5 v5.8.3/go.mod h1:K9kcYBlxkcPP8tvvjZZKs/m1edNAUFzBbdpTUKfCsuw=
-github.com/GoCodeAlone/encrypted-spaces-go v0.1.0 h1:OuncA4hPkSDO1u3uTRUT7QZ+9jUtzHE1TB1Kzhc5YPk=
-github.com/GoCodeAlone/encrypted-spaces-go v0.1.0/go.mod h1:w/pLxeD8nM0+PBEjYi+XqeJ0QkNgiq4eszodrTPR/io=
+github.com/GoCodeAlone/encrypted-spaces-go v0.2.0 h1:P2yaUlPwHfsuBDQEQyIMbzMpxBe2g6CjFP6SyN+iGtA=
+github.com/GoCodeAlone/encrypted-spaces-go v0.2.0/go.mod h1:w/pLxeD8nM0+PBEjYi+XqeJ0QkNgiq4eszodrTPR/io=
 github.com/GoCodeAlone/go-plugin v1.7.0 h1:EwnhqPlXiNmp85S+MXnKKvm3YlfA6O4NzBb4+GSlEVY=
 github.com/GoCodeAlone/go-plugin v1.7.0/go.mod h1:HbGQRZUIa+jbDfjsaZIMJYvrz+LnxL0mJpggfynSTMk=
 github.com/GoCodeAlone/modular v1.13.4 h1:De4p2qyJSVmstRGno/PM+fPdUCMu/7a9WgU5FUVGDa8=

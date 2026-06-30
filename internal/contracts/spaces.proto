@@ -115,3 +115,46 @@ message MemberUpdateOutput {
   bool member_allowed = 2;
   string action = 3;
 }
+
+message VerifyMembershipConfig {}
+
+message VerifyMembershipInput {
+  string group_id = 1;
+  string member_id = 2;
+  string issuer = 3;
+  int64 expires_at = 4;
+  string proof_digest = 5;
+  string upstream_path = 6;
+}
+
+message VerifyMembershipOutput {
+  VerificationReport report = 1;
+}
+
+message VerifyOperationConfig {}
+
+message VerifyOperationInput {
+  string transcript_id = 1;
+  string statement_id = 2;
+  string witness_hash = 3;
+  string proof_digest = 4;
+  string upstream_path = 5;
+}
+
+message VerifyOperationOutput {
+  VerificationReport report = 1;
+}
+
+message VerifyCheckpointConfig {}
+
+message VerifyCheckpointInput {
+  string checkpoint_id = 1;
+  string tree_head = 2;
+  uint64 tree_size = 3;
+  string proof_digest = 4;
+  string upstream_path = 5;
+}
+
+message VerifyCheckpointOutput {
+  VerificationReport report = 1;
+}

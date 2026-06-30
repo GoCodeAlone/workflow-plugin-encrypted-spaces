@@ -44,6 +44,9 @@ var encryptedSpacesStepTypes = []string{
 	"step.encrypted_space_fast_forward",
 	"step.encrypted_space_epoch_rotate",
 	"step.encrypted_space_member_update",
+	"step.encrypted_space_verify_membership",
+	"step.encrypted_space_verify_operation",
+	"step.encrypted_space_verify_checkpoint",
 }
 
 // TypedModuleTypes implements sdk.TypedModuleProvider.
@@ -108,6 +111,30 @@ func (p *EncryptedSpacesProvider) CreateTypedStep(typeName, name string, config 
 			ExecuteEncryptedSpaceMemberUpdate,
 		)
 		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_verify_membership":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.VerifyMembershipConfig{},
+			&contracts.VerifyMembershipInput{},
+			ExecuteEncryptedSpaceVerifyMembership,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_verify_operation":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.VerifyOperationConfig{},
+			&contracts.VerifyOperationInput{},
+			ExecuteEncryptedSpaceVerifyOperation,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_verify_checkpoint":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.VerifyCheckpointConfig{},
+			&contracts.VerifyCheckpointInput{},
+			ExecuteEncryptedSpaceVerifyCheckpoint,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
 	}
 	return nil, fmt.Errorf("%w: step type %q", sdk.ErrTypedContractNotHandled, typeName)
 }
@@ -128,6 +155,9 @@ func (p *EncryptedSpacesProvider) ContractRegistry() *pb.ContractRegistry {
 			stepContract("step.encrypted_space_fast_forward", pkg+"FastForwardConfig", pkg+"FastForwardInput", pkg+"FastForwardOutput"),
 			stepContract("step.encrypted_space_epoch_rotate", pkg+"EpochRotateConfig", pkg+"EpochRotateInput", pkg+"EpochRotateOutput"),
 			stepContract("step.encrypted_space_member_update", pkg+"MemberUpdateConfig", pkg+"MemberUpdateInput", pkg+"MemberUpdateOutput"),
+			stepContract("step.encrypted_space_verify_membership", pkg+"VerifyMembershipConfig", pkg+"VerifyMembershipInput", pkg+"VerifyMembershipOutput"),
+			stepContract("step.encrypted_space_verify_operation", pkg+"VerifyOperationConfig", pkg+"VerifyOperationInput", pkg+"VerifyOperationOutput"),
+			stepContract("step.encrypted_space_verify_checkpoint", pkg+"VerifyCheckpointConfig", pkg+"VerifyCheckpointInput", pkg+"VerifyCheckpointOutput"),
 		},
 	}
 }
