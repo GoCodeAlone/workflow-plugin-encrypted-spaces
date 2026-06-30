@@ -31,7 +31,12 @@ func TestEncryptedSpacesProviderDeclaresStrictScaffoldContracts(t *testing.T) {
 		"encrypted_space.store",
 		"encrypted_space.verifier",
 	})
-	assertStringSet(t, stepProvider.TypedStepTypes(), nil)
+	assertStringSet(t, stepProvider.TypedStepTypes(), []string{
+		"step.encrypted_space_append",
+		"step.encrypted_space_fast_forward",
+		"step.encrypted_space_epoch_rotate",
+		"step.encrypted_space_member_update",
+	})
 
 	registry := contractProvider.ContractRegistry()
 	if registry == nil {
@@ -50,18 +55,31 @@ func TestEncryptedSpacesProviderDeclaresStrictScaffoldContracts(t *testing.T) {
 		if descriptor.Mode != pb.ContractMode_CONTRACT_MODE_STRICT_PROTO {
 			t.Fatalf("%s mode = %s, want strict proto", contractKey(descriptor), descriptor.Mode)
 		}
-		if descriptor.Kind != pb.ContractKind_CONTRACT_KIND_MODULE {
-			t.Fatalf("%s kind = %s, want module", contractKey(descriptor), descriptor.Kind)
+		switch descriptor.Kind {
+		case pb.ContractKind_CONTRACT_KIND_MODULE:
+			contractsByKey["module:"+descriptor.ModuleType] = descriptor
+		case pb.ContractKind_CONTRACT_KIND_STEP:
+			contractsByKey["step:"+descriptor.StepType] = descriptor
+		default:
+			t.Fatalf("%s kind = %s, want module or step", contractKey(descriptor), descriptor.Kind)
 		}
-		contractsByKey["module:"+descriptor.ModuleType] = descriptor
-		if _, err := files.FindDescriptorByName(protoreflect.FullName(descriptor.ConfigMessage)); err != nil {
-			t.Fatalf("%s references unknown config %s: %v", contractKey(descriptor), descriptor.ConfigMessage, err)
+		for _, name := range []string{descriptor.ConfigMessage, descriptor.InputMessage, descriptor.OutputMessage} {
+			if name == "" {
+				continue
+			}
+			if _, err := files.FindDescriptorByName(protoreflect.FullName(name)); err != nil {
+				t.Fatalf("%s references unknown message %s: %v", contractKey(descriptor), name, err)
+			}
 		}
 	}
 
 	for _, key := range []string{
 		"module:encrypted_space.store",
 		"module:encrypted_space.verifier",
+		"step:step.encrypted_space_append",
+		"step:step.encrypted_space_fast_forward",
+		"step:step.encrypted_space_epoch_rotate",
+		"step:step.encrypted_space_member_update",
 	} {
 		if _, ok := contractsByKey[key]; !ok {
 			t.Fatalf("missing contract %s", key)

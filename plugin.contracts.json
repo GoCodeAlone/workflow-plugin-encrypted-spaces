@@ -11,6 +11,38 @@
       "kind": "module",
       "mode": "strict",
       "type": "encrypted_space.verifier"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.AppendConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.AppendInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.AppendOutput",
+      "type": "step.encrypted_space_append"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.FastForwardConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.FastForwardInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.FastForwardOutput",
+      "type": "step.encrypted_space_fast_forward"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.EpochRotateConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.EpochRotateInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.EpochRotateOutput",
+      "type": "step.encrypted_space_epoch_rotate"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.MemberUpdateConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.MemberUpdateInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.MemberUpdateOutput",
+      "type": "step.encrypted_space_member_update"
     }
   ],
   "version": "v1"

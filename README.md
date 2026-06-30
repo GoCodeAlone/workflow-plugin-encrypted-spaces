@@ -41,6 +41,13 @@ harnesses only. Production deployments should require proof reports whose
 - `encrypted_space.store`
 - `encrypted_space.verifier`
 
+## Step Types
+
+- `step.encrypted_space_append`
+- `step.encrypted_space_fast_forward`
+- `step.encrypted_space_epoch_rotate`
+- `step.encrypted_space_member_update`
+
 ## Module
 
 Go module: `github.com/GoCodeAlone/workflow-plugin-encrypted-spaces`

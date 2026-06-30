@@ -1,0 +1,10 @@
+name: encrypted-space-runtime
+plugins:
+  - name: workflow-plugin-encrypted-spaces
+    version: v0.1.0
+  - name: workflow-plugin-rooms
+    version: latest
+  - name: workflow-plugin-eventbus
+    version: latest
+  - name: workflow-plugin-audit
+    version: latest
