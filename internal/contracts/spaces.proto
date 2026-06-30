@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package workflow.plugins.encryptedspaces.v1;
+
+option go_package = "github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/internal/contracts";
+
+message SpaceStoreConfig {
+  string space_id = 1;
+  string backend = 2;
+  uint64 max_operations = 3;
+}
+
+message VerifierConfig {
+  string mode = 1;
+  bool allow_fake = 2;
+}

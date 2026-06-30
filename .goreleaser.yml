@@ -1,0 +1,32 @@
+version: 2
+
+builds:
+  - id: plugin
+    binary: workflow-plugin-encrypted-spaces
+    main: ./cmd/workflow-plugin-encrypted-spaces
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/internal.Version={{.Version}}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - id: default
+    formats: [tar.gz]
+    name_template: "{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}"
+    files:
+      - LICENSE
+      - plugin.json
+      - plugin.contracts.json
+
+checksum:
+  name_template: checksums.txt
+
+release:
+  draft: false

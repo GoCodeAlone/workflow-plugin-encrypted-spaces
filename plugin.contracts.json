@@ -1,0 +1,17 @@
+{
+  "contracts": [
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.SpaceStoreConfig",
+      "kind": "module",
+      "mode": "strict",
+      "type": "encrypted_space.store"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.VerifierConfig",
+      "kind": "module",
+      "mode": "strict",
+      "type": "encrypted_space.verifier"
+    }
+  ],
+  "version": "v1"
+}
