@@ -3,8 +3,9 @@
 Workflow plugin for Encrypted Spaces collaboration primitives.
 
 This plugin exposes Workflow module contracts for encrypted-space operation
-storage and proof-verifier configuration. The initial scaffold intentionally
-does not provide production proof verification or live service egress.
+storage, proof-verifier configuration, operation-log steps, epoch/member
+updates, and production-mode proof verification reports. It does not provide
+live Signal service egress.
 
 ## Installation
 
