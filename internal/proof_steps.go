@@ -31,7 +31,7 @@ func ExecuteEncryptedSpaceVerifyMembership(
 		return nil, fmt.Errorf("encrypted space verify membership: %w", err)
 	}
 	return &sdk.TypedStepResult[*contracts.VerifyMembershipOutput]{
-		Output: &contracts.VerifyMembershipOutput{Report: proofReport(report.Domain, report.Accepted, report.ProductionReady, report.UpstreamPath)},
+		Output: &contracts.VerifyMembershipOutput{Report: proofReport(req.Input.GetGroupId(), req.Input.GetProofDigest(), report.Accepted, report.ProductionReady)},
 	}, nil
 }
 
@@ -56,7 +56,7 @@ func ExecuteEncryptedSpaceVerifyOperation(
 		return nil, fmt.Errorf("encrypted space verify operation: %w", err)
 	}
 	return &sdk.TypedStepResult[*contracts.VerifyOperationOutput]{
-		Output: &contracts.VerifyOperationOutput{Report: proofReport(report.Domain, report.Accepted, report.ProductionReady, report.UpstreamPath)},
+		Output: &contracts.VerifyOperationOutput{Report: proofReport(req.Input.GetTranscriptId(), req.Input.GetProofDigest(), report.Accepted, report.ProductionReady)},
 	}, nil
 }
 
@@ -78,14 +78,14 @@ func ExecuteEncryptedSpaceVerifyCheckpoint(
 		return nil, fmt.Errorf("encrypted space verify checkpoint: %w", err)
 	}
 	return &sdk.TypedStepResult[*contracts.VerifyCheckpointOutput]{
-		Output: &contracts.VerifyCheckpointOutput{Report: proofReport(report.Domain, report.Accepted, report.ProductionReady, report.UpstreamPath)},
+		Output: &contracts.VerifyCheckpointOutput{Report: proofReport(req.Input.GetCheckpointId(), req.Input.GetProofDigest(), report.Accepted, report.ProductionReady)},
 	}, nil
 }
 
-func proofReport(domain string, accepted, productionReady bool, upstreamPath string) *contracts.VerificationReport {
+func proofReport(operationID, proofDigest string, accepted, productionReady bool) *contracts.VerificationReport {
 	return &contracts.VerificationReport{
-		OperationId:     domain,
-		Digest:          upstreamPath,
+		OperationId:     operationID,
+		Digest:          proofDigest,
 		Accepted:        accepted,
 		ProductionReady: productionReady,
 		Mode:            "production",
