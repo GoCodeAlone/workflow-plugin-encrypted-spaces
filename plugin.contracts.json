@@ -43,6 +43,30 @@
       "mode": "strict",
       "output": "workflow.plugins.encryptedspaces.v1.MemberUpdateOutput",
       "type": "step.encrypted_space_member_update"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.VerifyMembershipConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.VerifyMembershipInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.VerifyMembershipOutput",
+      "type": "step.encrypted_space_verify_membership"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.VerifyOperationConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.VerifyOperationInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.VerifyOperationOutput",
+      "type": "step.encrypted_space_verify_operation"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.VerifyCheckpointConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.VerifyCheckpointInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput",
+      "type": "step.encrypted_space_verify_checkpoint"
     }
   ],
   "version": "v1"

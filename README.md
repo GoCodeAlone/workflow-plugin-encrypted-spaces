@@ -47,6 +47,9 @@ harnesses only. Production deployments should require proof reports whose
 - `step.encrypted_space_fast_forward`
 - `step.encrypted_space_epoch_rotate`
 - `step.encrypted_space_member_update`
+- `step.encrypted_space_verify_membership`
+- `step.encrypted_space_verify_operation`
+- `step.encrypted_space_verify_checkpoint`
 
 ## Module
 
