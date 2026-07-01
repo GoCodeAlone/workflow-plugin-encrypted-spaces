@@ -6,6 +6,7 @@ import (
 
 	"github.com/GoCodeAlone/encrypted-spaces-go/keytrans"
 	"github.com/GoCodeAlone/encrypted-spaces-go/poksho"
+	"github.com/GoCodeAlone/encrypted-spaces-go/verification"
 	"github.com/GoCodeAlone/encrypted-spaces-go/zkgroup"
 	"github.com/GoCodeAlone/workflow/plugin/external/sdk"
 
@@ -82,6 +83,60 @@ func ExecuteEncryptedSpaceVerifyCheckpoint(
 	}, nil
 }
 
+func ExecuteEncryptedSpaceVectorReport(
+	_ context.Context,
+	req sdk.TypedStepRequest[*contracts.VectorReportConfig, *contracts.VectorReportInput],
+) (*sdk.TypedStepResult[*contracts.VectorReportOutput], error) {
+	report := verification.ProofCoverageReport()
+	required := requiredDomainSet(req.Config.GetRequiredDomains())
+	hasRequired := len(required) > 0
+	output := &contracts.VectorReportOutput{
+		UpstreamTag:          report.UpstreamTag,
+		ProductionEquivalent: true,
+		Rows:                 make([]*contracts.VectorCoverageRow, 0, len(report.Rows)),
+		DeferredDomains:      []string{},
+		Status:               "production-equivalent",
+		NonVectorDomains:     []string{},
+	}
+
+	for _, row := range report.Rows {
+		if !isProofCoverageDomain(row.Domain) {
+			continue
+		}
+		if hasRequired {
+			if _, ok := required[row.Domain]; !ok {
+				continue
+			}
+			delete(required, row.Domain)
+		}
+		contractRow := &contracts.VectorCoverageRow{
+			Domain: row.Domain,
+			Status: row.Status,
+			Vector: row.Vector,
+			Reason: row.Reason,
+			Notes:  row.Notes,
+		}
+		output.Rows = append(output.Rows, contractRow)
+		if row.Status != "vector-backed" {
+			output.ProductionEquivalent = false
+			output.NonVectorDomains = append(output.NonVectorDomains, row.Domain)
+			if row.Status == "deferred" {
+				output.DeferredDomains = append(output.DeferredDomains, row.Domain)
+			}
+		}
+	}
+	for domain := range required {
+		return nil, fmt.Errorf("encrypted space vector report: required domain %q not found", domain)
+	}
+	if !output.ProductionEquivalent {
+		output.Status = "deferred"
+	}
+	if req.Config.GetRequireProductionEquivalence() && !output.ProductionEquivalent {
+		return nil, fmt.Errorf("encrypted space vector report: production equivalence requires vector-backed domains, non-vector-backed domains: %v", output.NonVectorDomains)
+	}
+	return &sdk.TypedStepResult[*contracts.VectorReportOutput]{Output: output}, nil
+}
+
 func proofReport(operationID, proofDigest string, accepted, productionReady bool) *contracts.VerificationReport {
 	return &contracts.VerificationReport{
 		OperationId:     operationID,
@@ -89,5 +144,28 @@ func proofReport(operationID, proofDigest string, accepted, productionReady bool
 		Accepted:        accepted,
 		ProductionReady: productionReady,
 		Mode:            "production",
+	}
+}
+
+func requiredDomainSet(domains []string) map[string]struct{} {
+	if len(domains) == 0 {
+		return nil
+	}
+	required := make(map[string]struct{}, len(domains))
+	for _, domain := range domains {
+		if domain == "" {
+			continue
+		}
+		required[domain] = struct{}{}
+	}
+	return required
+}
+
+func isProofCoverageDomain(domain string) bool {
+	switch domain {
+	case "zkgroup", "zkcredential", "poksho", "keytrans", "message-backup", "svr-svrb":
+		return true
+	default:
+		return false
 	}
 }

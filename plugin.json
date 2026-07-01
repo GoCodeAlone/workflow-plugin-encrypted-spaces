@@ -43,7 +43,8 @@
     "step.encrypted_space_member_update",
     "step.encrypted_space_verify_membership",
     "step.encrypted_space_verify_operation",
-    "step.encrypted_space_verify_checkpoint"
+    "step.encrypted_space_verify_checkpoint",
+    "step.encrypted_space_vector_report"
   ],
   "capabilities": {
     "configProvider": false,
@@ -58,7 +59,8 @@
       "step.encrypted_space_member_update",
       "step.encrypted_space_verify_membership",
       "step.encrypted_space_verify_operation",
-      "step.encrypted_space_verify_checkpoint"
+      "step.encrypted_space_verify_checkpoint",
+      "step.encrypted_space_vector_report"
     ],
     "triggerTypes": []
   }

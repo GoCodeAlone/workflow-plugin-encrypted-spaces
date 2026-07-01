@@ -67,6 +67,14 @@
       "mode": "strict",
       "output": "workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput",
       "type": "step.encrypted_space_verify_checkpoint"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.VectorReportConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.VectorReportInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.VectorReportOutput",
+      "type": "step.encrypted_space_vector_report"
     }
   ],
   "version": "v1"

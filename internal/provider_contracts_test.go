@@ -39,6 +39,7 @@ func TestEncryptedSpacesProviderDeclaresStrictScaffoldContracts(t *testing.T) {
 		"step.encrypted_space_verify_membership",
 		"step.encrypted_space_verify_operation",
 		"step.encrypted_space_verify_checkpoint",
+		"step.encrypted_space_vector_report",
 	})
 
 	registry := contractProvider.ContractRegistry()
@@ -86,6 +87,7 @@ func TestEncryptedSpacesProviderDeclaresStrictScaffoldContracts(t *testing.T) {
 		"step:step.encrypted_space_verify_membership",
 		"step:step.encrypted_space_verify_operation",
 		"step:step.encrypted_space_verify_checkpoint",
+		"step:step.encrypted_space_vector_report",
 	} {
 		if _, ok := contractsByKey[key]; !ok {
 			t.Fatalf("missing contract %s", key)

@@ -1645,6 +1645,254 @@ func (x *VerifyCheckpointOutput) GetReport() *VerificationReport {
 	return nil
 }
 
+type VectorReportConfig struct {
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	RequiredDomains              []string               `protobuf:"bytes,1,rep,name=required_domains,json=requiredDomains,proto3" json:"required_domains,omitempty"`
+	RequireProductionEquivalence bool                   `protobuf:"varint,2,opt,name=require_production_equivalence,json=requireProductionEquivalence,proto3" json:"require_production_equivalence,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
+}
+
+func (x *VectorReportConfig) Reset() {
+	*x = VectorReportConfig{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VectorReportConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VectorReportConfig) ProtoMessage() {}
+
+func (x *VectorReportConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VectorReportConfig.ProtoReflect.Descriptor instead.
+func (*VectorReportConfig) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *VectorReportConfig) GetRequiredDomains() []string {
+	if x != nil {
+		return x.RequiredDomains
+	}
+	return nil
+}
+
+func (x *VectorReportConfig) GetRequireProductionEquivalence() bool {
+	if x != nil {
+		return x.RequireProductionEquivalence
+	}
+	return false
+}
+
+type VectorReportInput struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VectorReportInput) Reset() {
+	*x = VectorReportInput{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VectorReportInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VectorReportInput) ProtoMessage() {}
+
+func (x *VectorReportInput) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VectorReportInput.ProtoReflect.Descriptor instead.
+func (*VectorReportInput) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{29}
+}
+
+type VectorCoverageRow struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Vector        string                 `protobuf:"bytes,3,opt,name=vector,proto3" json:"vector,omitempty"`
+	Reason        string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
+	Notes         string                 `protobuf:"bytes,5,opt,name=notes,proto3" json:"notes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VectorCoverageRow) Reset() {
+	*x = VectorCoverageRow{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VectorCoverageRow) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VectorCoverageRow) ProtoMessage() {}
+
+func (x *VectorCoverageRow) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VectorCoverageRow.ProtoReflect.Descriptor instead.
+func (*VectorCoverageRow) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *VectorCoverageRow) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *VectorCoverageRow) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *VectorCoverageRow) GetVector() string {
+	if x != nil {
+		return x.Vector
+	}
+	return ""
+}
+
+func (x *VectorCoverageRow) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+func (x *VectorCoverageRow) GetNotes() string {
+	if x != nil {
+		return x.Notes
+	}
+	return ""
+}
+
+type VectorReportOutput struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	UpstreamTag          string                 `protobuf:"bytes,1,opt,name=upstream_tag,json=upstreamTag,proto3" json:"upstream_tag,omitempty"`
+	ProductionEquivalent bool                   `protobuf:"varint,2,opt,name=production_equivalent,json=productionEquivalent,proto3" json:"production_equivalent,omitempty"`
+	Rows                 []*VectorCoverageRow   `protobuf:"bytes,3,rep,name=rows,proto3" json:"rows,omitempty"`
+	DeferredDomains      []string               `protobuf:"bytes,4,rep,name=deferred_domains,json=deferredDomains,proto3" json:"deferred_domains,omitempty"`
+	Status               string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	NonVectorDomains     []string               `protobuf:"bytes,6,rep,name=non_vector_domains,json=nonVectorDomains,proto3" json:"non_vector_domains,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *VectorReportOutput) Reset() {
+	*x = VectorReportOutput{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VectorReportOutput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VectorReportOutput) ProtoMessage() {}
+
+func (x *VectorReportOutput) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VectorReportOutput.ProtoReflect.Descriptor instead.
+func (*VectorReportOutput) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *VectorReportOutput) GetUpstreamTag() string {
+	if x != nil {
+		return x.UpstreamTag
+	}
+	return ""
+}
+
+func (x *VectorReportOutput) GetProductionEquivalent() bool {
+	if x != nil {
+		return x.ProductionEquivalent
+	}
+	return false
+}
+
+func (x *VectorReportOutput) GetRows() []*VectorCoverageRow {
+	if x != nil {
+		return x.Rows
+	}
+	return nil
+}
+
+func (x *VectorReportOutput) GetDeferredDomains() []string {
+	if x != nil {
+		return x.DeferredDomains
+	}
+	return nil
+}
+
+func (x *VectorReportOutput) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *VectorReportOutput) GetNonVectorDomains() []string {
+	if x != nil {
+		return x.NonVectorDomains
+	}
+	return nil
+}
+
 var File_internal_contracts_spaces_proto protoreflect.FileDescriptor
 
 const file_internal_contracts_spaces_proto_rawDesc = "" +
@@ -1765,7 +2013,24 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"\fproof_digest\x18\x04 \x01(\tR\vproofDigest\x12#\n" +
 	"\rupstream_path\x18\x05 \x01(\tR\fupstreamPath\"i\n" +
 	"\x16VerifyCheckpointOutput\x12O\n" +
-	"\x06report\x18\x01 \x01(\v27.workflow.plugins.encryptedspaces.v1.VerificationReportR\x06reportBLZJgithub.com/GoCodeAlone/workflow-plugin-encrypted-spaces/internal/contractsb\x06proto3"
+	"\x06report\x18\x01 \x01(\v27.workflow.plugins.encryptedspaces.v1.VerificationReportR\x06report\"\x85\x01\n" +
+	"\x12VectorReportConfig\x12)\n" +
+	"\x10required_domains\x18\x01 \x03(\tR\x0frequiredDomains\x12D\n" +
+	"\x1erequire_production_equivalence\x18\x02 \x01(\bR\x1crequireProductionEquivalence\"\x13\n" +
+	"\x11VectorReportInput\"\x89\x01\n" +
+	"\x11VectorCoverageRow\x12\x16\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x16\n" +
+	"\x06vector\x18\x03 \x01(\tR\x06vector\x12\x16\n" +
+	"\x06reason\x18\x04 \x01(\tR\x06reason\x12\x14\n" +
+	"\x05notes\x18\x05 \x01(\tR\x05notes\"\xa9\x02\n" +
+	"\x12VectorReportOutput\x12!\n" +
+	"\fupstream_tag\x18\x01 \x01(\tR\vupstreamTag\x123\n" +
+	"\x15production_equivalent\x18\x02 \x01(\bR\x14productionEquivalent\x12J\n" +
+	"\x04rows\x18\x03 \x03(\v26.workflow.plugins.encryptedspaces.v1.VectorCoverageRowR\x04rows\x12)\n" +
+	"\x10deferred_domains\x18\x04 \x03(\tR\x0fdeferredDomains\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x12,\n" +
+	"\x12non_vector_domains\x18\x06 \x03(\tR\x10nonVectorDomainsBLZJgithub.com/GoCodeAlone/workflow-plugin-encrypted-spaces/internal/contractsb\x06proto3"
 
 var (
 	file_internal_contracts_spaces_proto_rawDescOnce sync.Once
@@ -1779,7 +2044,7 @@ func file_internal_contracts_spaces_proto_rawDescGZIP() []byte {
 	return file_internal_contracts_spaces_proto_rawDescData
 }
 
-var file_internal_contracts_spaces_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_internal_contracts_spaces_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_internal_contracts_spaces_proto_goTypes = []any{
 	(*SpaceStoreConfig)(nil),       // 0: workflow.plugins.encryptedspaces.v1.SpaceStoreConfig
 	(*VerifierConfig)(nil),         // 1: workflow.plugins.encryptedspaces.v1.VerifierConfig
@@ -1809,22 +2074,27 @@ var file_internal_contracts_spaces_proto_goTypes = []any{
 	(*VerifyCheckpointConfig)(nil), // 25: workflow.plugins.encryptedspaces.v1.VerifyCheckpointConfig
 	(*VerifyCheckpointInput)(nil),  // 26: workflow.plugins.encryptedspaces.v1.VerifyCheckpointInput
 	(*VerifyCheckpointOutput)(nil), // 27: workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput
+	(*VectorReportConfig)(nil),     // 28: workflow.plugins.encryptedspaces.v1.VectorReportConfig
+	(*VectorReportInput)(nil),      // 29: workflow.plugins.encryptedspaces.v1.VectorReportInput
+	(*VectorCoverageRow)(nil),      // 30: workflow.plugins.encryptedspaces.v1.VectorCoverageRow
+	(*VectorReportOutput)(nil),     // 31: workflow.plugins.encryptedspaces.v1.VectorReportOutput
 }
 var file_internal_contracts_spaces_proto_depIdxs = []int32{
-	2, // 0: workflow.plugins.encryptedspaces.v1.AppendConfig.retention:type_name -> workflow.plugins.encryptedspaces.v1.RetentionPolicy
-	3, // 1: workflow.plugins.encryptedspaces.v1.AppendInput.operation:type_name -> workflow.plugins.encryptedspaces.v1.EncryptedOperation
-	4, // 2: workflow.plugins.encryptedspaces.v1.AppendOutput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
-	6, // 3: workflow.plugins.encryptedspaces.v1.AppendOutput.verification:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
-	4, // 4: workflow.plugins.encryptedspaces.v1.FastForwardInput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
-	5, // 5: workflow.plugins.encryptedspaces.v1.FastForwardInput.checkpoint:type_name -> workflow.plugins.encryptedspaces.v1.FastForwardCheckpoint
-	6, // 6: workflow.plugins.encryptedspaces.v1.VerifyMembershipOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
-	6, // 7: workflow.plugins.encryptedspaces.v1.VerifyOperationOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
-	6, // 8: workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	2,  // 0: workflow.plugins.encryptedspaces.v1.AppendConfig.retention:type_name -> workflow.plugins.encryptedspaces.v1.RetentionPolicy
+	3,  // 1: workflow.plugins.encryptedspaces.v1.AppendInput.operation:type_name -> workflow.plugins.encryptedspaces.v1.EncryptedOperation
+	4,  // 2: workflow.plugins.encryptedspaces.v1.AppendOutput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
+	6,  // 3: workflow.plugins.encryptedspaces.v1.AppendOutput.verification:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
+	4,  // 4: workflow.plugins.encryptedspaces.v1.FastForwardInput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
+	5,  // 5: workflow.plugins.encryptedspaces.v1.FastForwardInput.checkpoint:type_name -> workflow.plugins.encryptedspaces.v1.FastForwardCheckpoint
+	6,  // 6: workflow.plugins.encryptedspaces.v1.VerifyMembershipOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
+	6,  // 7: workflow.plugins.encryptedspaces.v1.VerifyOperationOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
+	6,  // 8: workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
+	30, // 9: workflow.plugins.encryptedspaces.v1.VectorReportOutput.rows:type_name -> workflow.plugins.encryptedspaces.v1.VectorCoverageRow
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_internal_contracts_spaces_proto_init() }
@@ -1838,7 +2108,7 @@ func file_internal_contracts_spaces_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_contracts_spaces_proto_rawDesc), len(file_internal_contracts_spaces_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   28,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
