@@ -1,0 +1,14 @@
+version: 1
+generated_at: 2026-07-01T05:08:09Z
+source_manifest_sha256: d56df9103368233eae85948508f3a3d168ec52d2a8416d1d6cb8c044f4a02203
+lockfile_sha256: 8ddf5fd83304fd10477c8976f1a2455b6dba9b3050d299d051f4a9239aa29ea5
+plugins:
+    workflow-plugin-audit:
+        version: v0.1.4
+        source:
+    workflow-plugin-eventbus:
+        version: v0.3.7
+        source:
+    workflow-plugin-rooms:
+        version: v0.1.7
+        source:

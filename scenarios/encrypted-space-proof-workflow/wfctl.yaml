@@ -1,0 +1,8 @@
+name: encrypted-space-proof-workflow
+plugins:
+  - name: workflow-plugin-rooms
+    version: v0.1.7
+  - name: workflow-plugin-eventbus
+    version: v0.3.7
+  - name: workflow-plugin-audit
+    version: v0.1.4

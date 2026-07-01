@@ -1226,12 +1226,13 @@ func (x *AppendVerifiedInput) GetCheckpoint() *CheckpointProof {
 }
 
 type AppendVerifiedOutput struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Commitment    *OperationCommitment   `protobuf:"bytes,1,opt,name=commitment,proto3" json:"commitment,omitempty"`
-	Reports       []*ProofReport         `protobuf:"bytes,2,rep,name=reports,proto3" json:"reports,omitempty"`
-	Evidence      *ProofEvidence         `protobuf:"bytes,3,opt,name=evidence,proto3" json:"evidence,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Commitment     *OperationCommitment   `protobuf:"bytes,1,opt,name=commitment,proto3" json:"commitment,omitempty"`
+	Reports        []*ProofReport         `protobuf:"bytes,2,rep,name=reports,proto3" json:"reports,omitempty"`
+	Evidence       *ProofEvidence         `protobuf:"bytes,3,opt,name=evidence,proto3" json:"evidence,omitempty"`
+	AuditEventJson string                 `protobuf:"bytes,4,opt,name=audit_event_json,json=auditEventJson,proto3" json:"audit_event_json,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *AppendVerifiedOutput) Reset() {
@@ -1283,6 +1284,13 @@ func (x *AppendVerifiedOutput) GetEvidence() *ProofEvidence {
 		return x.Evidence
 	}
 	return nil
+}
+
+func (x *AppendVerifiedOutput) GetAuditEventJson() string {
+	if x != nil {
+		return x.AuditEventJson
+	}
+	return ""
 }
 
 type ProofEvidenceConfig struct {
@@ -1374,11 +1382,12 @@ func (x *ProofEvidenceInput) GetReports() []*ProofReport {
 }
 
 type ProofEvidenceOutput struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Evidence      *ProofEvidence         `protobuf:"bytes,1,opt,name=evidence,proto3" json:"evidence,omitempty"`
-	Json          string                 `protobuf:"bytes,2,opt,name=json,proto3" json:"json,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Evidence       *ProofEvidence         `protobuf:"bytes,1,opt,name=evidence,proto3" json:"evidence,omitempty"`
+	Json           string                 `protobuf:"bytes,2,opt,name=json,proto3" json:"json,omitempty"`
+	AuditEventJson string                 `protobuf:"bytes,3,opt,name=audit_event_json,json=auditEventJson,proto3" json:"audit_event_json,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ProofEvidenceOutput) Reset() {
@@ -1421,6 +1430,13 @@ func (x *ProofEvidenceOutput) GetEvidence() *ProofEvidence {
 func (x *ProofEvidenceOutput) GetJson() string {
 	if x != nil {
 		return x.Json
+	}
+	return ""
+}
+
+func (x *ProofEvidenceOutput) GetAuditEventJson() string {
+	if x != nil {
+		return x.AuditEventJson
 	}
 	return ""
 }
@@ -2723,22 +2739,24 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"membership\x12T\n" +
 	"\n" +
 	"checkpoint\x18\x04 \x01(\v24.workflow.plugins.encryptedspaces.v1.CheckpointProofR\n" +
-	"checkpoint\"\x8c\x02\n" +
+	"checkpoint\"\xb6\x02\n" +
 	"\x14AppendVerifiedOutput\x12X\n" +
 	"\n" +
 	"commitment\x18\x01 \x01(\v28.workflow.plugins.encryptedspaces.v1.OperationCommitmentR\n" +
 	"commitment\x12J\n" +
 	"\areports\x18\x02 \x03(\v20.workflow.plugins.encryptedspaces.v1.ProofReportR\areports\x12N\n" +
-	"\bevidence\x18\x03 \x01(\v22.workflow.plugins.encryptedspaces.v1.ProofEvidenceR\bevidence\"\x15\n" +
+	"\bevidence\x18\x03 \x01(\v22.workflow.plugins.encryptedspaces.v1.ProofEvidenceR\bevidence\x12(\n" +
+	"\x10audit_event_json\x18\x04 \x01(\tR\x0eauditEventJson\"\x15\n" +
 	"\x13ProofEvidenceConfig\"\xba\x01\n" +
 	"\x12ProofEvidenceInput\x12X\n" +
 	"\n" +
 	"commitment\x18\x01 \x01(\v28.workflow.plugins.encryptedspaces.v1.OperationCommitmentR\n" +
 	"commitment\x12J\n" +
-	"\areports\x18\x02 \x03(\v20.workflow.plugins.encryptedspaces.v1.ProofReportR\areports\"y\n" +
+	"\areports\x18\x02 \x03(\v20.workflow.plugins.encryptedspaces.v1.ProofReportR\areports\"\xa3\x01\n" +
 	"\x13ProofEvidenceOutput\x12N\n" +
 	"\bevidence\x18\x01 \x01(\v22.workflow.plugins.encryptedspaces.v1.ProofEvidenceR\bevidence\x12\x12\n" +
-	"\x04json\x18\x02 \x01(\tR\x04json\"\x13\n" +
+	"\x04json\x18\x02 \x01(\tR\x04json\x12(\n" +
+	"\x10audit_event_json\x18\x03 \x01(\tR\x0eauditEventJson\"\x13\n" +
 	"\x11FastForwardConfig\"\xc8\x01\n" +
 	"\x10FastForwardInput\x12X\n" +
 	"\n" +

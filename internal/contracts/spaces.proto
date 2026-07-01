@@ -133,6 +133,7 @@ message AppendVerifiedOutput {
   OperationCommitment commitment = 1;
   repeated ProofReport reports = 2;
   ProofEvidence evidence = 3;
+  string audit_event_json = 4;
 }
 
 message ProofEvidenceConfig {}
@@ -145,6 +146,7 @@ message ProofEvidenceInput {
 message ProofEvidenceOutput {
   ProofEvidence evidence = 1;
   string json = 2;
+  string audit_event_json = 3;
 }
 
 message FastForwardConfig {}
