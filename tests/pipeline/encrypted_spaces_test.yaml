@@ -121,3 +121,6 @@ tests:
         executed: true
       - step: proof_evidence
         executed: true
+      - step: proof_evidence
+        output:
+          json: '{"space_id":"space-1","operation_id":"verified-op","sequence":1,"digest":"sha256:b4271c516f7ffeb5139cd65d974b83d7a822ce5a0f3c1356f2eaf00c454d396b","key_epoch":1,"membership_epoch":1,"ciphertext_size":21,"reports":[{"domain":"operationlog.commitment","accepted":true,"production_ready":true},{"domain":"zkgroup.membership","accepted":true,"production_ready":true,"upstream_path":"java/shared/java/org/signal/libsignal/zkgroup/groups"},{"domain":"keytrans.checkpoint","accepted":true,"production_ready":true,"upstream_path":"rust/keytrans/src/verify.rs"}]}'
