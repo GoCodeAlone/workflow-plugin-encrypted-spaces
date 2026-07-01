@@ -26,18 +26,12 @@ make test
 make install-local
 ```
 
-## Release Stages
+## Capability Surface
 
-- `v0.1.0`: append, fast-forward, epoch, member-update, trigger, and audit
-  primitives backed by `encrypted-spaces-go` fake/no-proof verification.
-- `v0.2.0`: production proof verification primitives backed by upstream
-  vector-tested proof ports.
-- `v0.3.0`: vector coverage report step backed by `encrypted-spaces-go v0.3.0`;
-  backup and SVR proof domains remain explicitly deferred and block production
-  equivalence claims.
-- `v0.4.0`: proof policy, verified append, and redacted proof-evidence
-  workflow contracts backed by `encrypted-spaces-go v0.4.0`, with a
-  rooms/eventbus/audit composition scenario for private collaboration apps.
+The current release exposes operation-log, epoch/member, proof-report,
+proof-policy, verified-append, and redacted proof-evidence primitives backed by
+`encrypted-spaces-go`. It also includes a rooms/eventbus/audit composition
+scenario for private collaboration apps.
 
 Fake/no-proof modes are for application composition tests and conformance
 harnesses only. Production deployments should require proof reports whose
