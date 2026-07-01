@@ -1,6 +1,12 @@
 {
   "contracts": [
     {
+      "config": "workflow.plugins.encryptedspaces.v1.ProofPolicyConfig",
+      "kind": "module",
+      "mode": "strict",
+      "type": "encrypted_space.proof_policy"
+    },
+    {
       "config": "workflow.plugins.encryptedspaces.v1.SpaceStoreConfig",
       "kind": "module",
       "mode": "strict",
@@ -19,6 +25,14 @@
       "mode": "strict",
       "output": "workflow.plugins.encryptedspaces.v1.AppendOutput",
       "type": "step.encrypted_space_append"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.AppendVerifiedConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.AppendVerifiedInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.AppendVerifiedOutput",
+      "type": "step.encrypted_space_append_verified"
     },
     {
       "config": "workflow.plugins.encryptedspaces.v1.FastForwardConfig",
@@ -43,6 +57,14 @@
       "mode": "strict",
       "output": "workflow.plugins.encryptedspaces.v1.MemberUpdateOutput",
       "type": "step.encrypted_space_member_update"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.ProofEvidenceConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.ProofEvidenceInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.ProofEvidenceOutput",
+      "type": "step.encrypted_space_proof_evidence"
     },
     {
       "config": "workflow.plugins.encryptedspaces.v1.VerifyMembershipConfig",

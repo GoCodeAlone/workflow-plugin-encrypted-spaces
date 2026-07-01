@@ -133,6 +133,66 @@ func (x *VerifierConfig) GetAllowFake() bool {
 	return false
 }
 
+type ProofPolicyConfig struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Mode                string                 `protobuf:"bytes,1,opt,name=mode,proto3" json:"mode,omitempty"`
+	RequireVectorBacked bool                   `protobuf:"varint,2,opt,name=require_vector_backed,json=requireVectorBacked,proto3" json:"require_vector_backed,omitempty"`
+	DeferredDomains     []string               `protobuf:"bytes,3,rep,name=deferred_domains,json=deferredDomains,proto3" json:"deferred_domains,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ProofPolicyConfig) Reset() {
+	*x = ProofPolicyConfig{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProofPolicyConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProofPolicyConfig) ProtoMessage() {}
+
+func (x *ProofPolicyConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProofPolicyConfig.ProtoReflect.Descriptor instead.
+func (*ProofPolicyConfig) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ProofPolicyConfig) GetMode() string {
+	if x != nil {
+		return x.Mode
+	}
+	return ""
+}
+
+func (x *ProofPolicyConfig) GetRequireVectorBacked() bool {
+	if x != nil {
+		return x.RequireVectorBacked
+	}
+	return false
+}
+
+func (x *ProofPolicyConfig) GetDeferredDomains() []string {
+	if x != nil {
+		return x.DeferredDomains
+	}
+	return nil
+}
+
 type RetentionPolicy struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	MaxOperations      uint32                 `protobuf:"varint,1,opt,name=max_operations,json=maxOperations,proto3" json:"max_operations,omitempty"`
@@ -144,7 +204,7 @@ type RetentionPolicy struct {
 
 func (x *RetentionPolicy) Reset() {
 	*x = RetentionPolicy{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[2]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -156,7 +216,7 @@ func (x *RetentionPolicy) String() string {
 func (*RetentionPolicy) ProtoMessage() {}
 
 func (x *RetentionPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[2]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -169,7 +229,7 @@ func (x *RetentionPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RetentionPolicy.ProtoReflect.Descriptor instead.
 func (*RetentionPolicy) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{2}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *RetentionPolicy) GetMaxOperations() uint32 {
@@ -211,7 +271,7 @@ type EncryptedOperation struct {
 
 func (x *EncryptedOperation) Reset() {
 	*x = EncryptedOperation{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[3]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -223,7 +283,7 @@ func (x *EncryptedOperation) String() string {
 func (*EncryptedOperation) ProtoMessage() {}
 
 func (x *EncryptedOperation) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[3]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -236,7 +296,7 @@ func (x *EncryptedOperation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EncryptedOperation.ProtoReflect.Descriptor instead.
 func (*EncryptedOperation) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{3}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *EncryptedOperation) GetSpaceId() string {
@@ -324,7 +384,7 @@ type OperationCommitment struct {
 
 func (x *OperationCommitment) Reset() {
 	*x = OperationCommitment{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[4]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -336,7 +396,7 @@ func (x *OperationCommitment) String() string {
 func (*OperationCommitment) ProtoMessage() {}
 
 func (x *OperationCommitment) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[4]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -349,7 +409,7 @@ func (x *OperationCommitment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperationCommitment.ProtoReflect.Descriptor instead.
 func (*OperationCommitment) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{4}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *OperationCommitment) GetSpaceId() string {
@@ -415,7 +475,7 @@ type FastForwardCheckpoint struct {
 
 func (x *FastForwardCheckpoint) Reset() {
 	*x = FastForwardCheckpoint{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[5]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -427,7 +487,7 @@ func (x *FastForwardCheckpoint) String() string {
 func (*FastForwardCheckpoint) ProtoMessage() {}
 
 func (x *FastForwardCheckpoint) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[5]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -440,7 +500,7 @@ func (x *FastForwardCheckpoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FastForwardCheckpoint.ProtoReflect.Descriptor instead.
 func (*FastForwardCheckpoint) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{5}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *FastForwardCheckpoint) GetSpaceId() string {
@@ -498,7 +558,7 @@ type VerificationReport struct {
 
 func (x *VerificationReport) Reset() {
 	*x = VerificationReport{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[6]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -510,7 +570,7 @@ func (x *VerificationReport) String() string {
 func (*VerificationReport) ProtoMessage() {}
 
 func (x *VerificationReport) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[6]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -523,7 +583,7 @@ func (x *VerificationReport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerificationReport.ProtoReflect.Descriptor instead.
 func (*VerificationReport) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{6}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *VerificationReport) GetOperationId() string {
@@ -561,6 +621,342 @@ func (x *VerificationReport) GetMode() string {
 	return ""
 }
 
+type ProofReport struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Domain          string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	Accepted        bool                   `protobuf:"varint,2,opt,name=accepted,proto3" json:"accepted,omitempty"`
+	ProductionReady bool                   `protobuf:"varint,3,opt,name=production_ready,json=productionReady,proto3" json:"production_ready,omitempty"`
+	UpstreamPath    string                 `protobuf:"bytes,4,opt,name=upstream_path,json=upstreamPath,proto3" json:"upstream_path,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ProofReport) Reset() {
+	*x = ProofReport{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProofReport) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProofReport) ProtoMessage() {}
+
+func (x *ProofReport) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProofReport.ProtoReflect.Descriptor instead.
+func (*ProofReport) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ProofReport) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *ProofReport) GetAccepted() bool {
+	if x != nil {
+		return x.Accepted
+	}
+	return false
+}
+
+func (x *ProofReport) GetProductionReady() bool {
+	if x != nil {
+		return x.ProductionReady
+	}
+	return false
+}
+
+func (x *ProofReport) GetUpstreamPath() string {
+	if x != nil {
+		return x.UpstreamPath
+	}
+	return ""
+}
+
+type MembershipProof struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GroupId       string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	MemberId      string                 `protobuf:"bytes,2,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
+	Issuer        string                 `protobuf:"bytes,3,opt,name=issuer,proto3" json:"issuer,omitempty"`
+	ExpiresAt     int64                  `protobuf:"varint,4,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	ProofDigest   string                 `protobuf:"bytes,5,opt,name=proof_digest,json=proofDigest,proto3" json:"proof_digest,omitempty"`
+	UpstreamPath  string                 `protobuf:"bytes,6,opt,name=upstream_path,json=upstreamPath,proto3" json:"upstream_path,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MembershipProof) Reset() {
+	*x = MembershipProof{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MembershipProof) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MembershipProof) ProtoMessage() {}
+
+func (x *MembershipProof) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MembershipProof.ProtoReflect.Descriptor instead.
+func (*MembershipProof) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *MembershipProof) GetGroupId() string {
+	if x != nil {
+		return x.GroupId
+	}
+	return ""
+}
+
+func (x *MembershipProof) GetMemberId() string {
+	if x != nil {
+		return x.MemberId
+	}
+	return ""
+}
+
+func (x *MembershipProof) GetIssuer() string {
+	if x != nil {
+		return x.Issuer
+	}
+	return ""
+}
+
+func (x *MembershipProof) GetExpiresAt() int64 {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return 0
+}
+
+func (x *MembershipProof) GetProofDigest() string {
+	if x != nil {
+		return x.ProofDigest
+	}
+	return ""
+}
+
+func (x *MembershipProof) GetUpstreamPath() string {
+	if x != nil {
+		return x.UpstreamPath
+	}
+	return ""
+}
+
+type CheckpointProof struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CheckpointId     string                 `protobuf:"bytes,1,opt,name=checkpoint_id,json=checkpointId,proto3" json:"checkpoint_id,omitempty"`
+	TreeHead         string                 `protobuf:"bytes,2,opt,name=tree_head,json=treeHead,proto3" json:"tree_head,omitempty"`
+	TreeSize         uint64                 `protobuf:"varint,3,opt,name=tree_size,json=treeSize,proto3" json:"tree_size,omitempty"`
+	ProofDigest      string                 `protobuf:"bytes,4,opt,name=proof_digest,json=proofDigest,proto3" json:"proof_digest,omitempty"`
+	UpstreamPath     string                 `protobuf:"bytes,5,opt,name=upstream_path,json=upstreamPath,proto3" json:"upstream_path,omitempty"`
+	PreviousTreeSize uint64                 `protobuf:"varint,6,opt,name=previous_tree_size,json=previousTreeSize,proto3" json:"previous_tree_size,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CheckpointProof) Reset() {
+	*x = CheckpointProof{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckpointProof) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckpointProof) ProtoMessage() {}
+
+func (x *CheckpointProof) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckpointProof.ProtoReflect.Descriptor instead.
+func (*CheckpointProof) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CheckpointProof) GetCheckpointId() string {
+	if x != nil {
+		return x.CheckpointId
+	}
+	return ""
+}
+
+func (x *CheckpointProof) GetTreeHead() string {
+	if x != nil {
+		return x.TreeHead
+	}
+	return ""
+}
+
+func (x *CheckpointProof) GetTreeSize() uint64 {
+	if x != nil {
+		return x.TreeSize
+	}
+	return 0
+}
+
+func (x *CheckpointProof) GetProofDigest() string {
+	if x != nil {
+		return x.ProofDigest
+	}
+	return ""
+}
+
+func (x *CheckpointProof) GetUpstreamPath() string {
+	if x != nil {
+		return x.UpstreamPath
+	}
+	return ""
+}
+
+func (x *CheckpointProof) GetPreviousTreeSize() uint64 {
+	if x != nil {
+		return x.PreviousTreeSize
+	}
+	return 0
+}
+
+type ProofEvidence struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	SpaceId         string                 `protobuf:"bytes,1,opt,name=space_id,json=spaceId,proto3" json:"space_id,omitempty"`
+	OperationId     string                 `protobuf:"bytes,2,opt,name=operation_id,json=operationId,proto3" json:"operation_id,omitempty"`
+	Sequence        uint64                 `protobuf:"varint,3,opt,name=sequence,proto3" json:"sequence,omitempty"`
+	Digest          string                 `protobuf:"bytes,4,opt,name=digest,proto3" json:"digest,omitempty"`
+	KeyEpoch        uint64                 `protobuf:"varint,5,opt,name=key_epoch,json=keyEpoch,proto3" json:"key_epoch,omitempty"`
+	MembershipEpoch uint64                 `protobuf:"varint,6,opt,name=membership_epoch,json=membershipEpoch,proto3" json:"membership_epoch,omitempty"`
+	CiphertextSize  uint64                 `protobuf:"varint,7,opt,name=ciphertext_size,json=ciphertextSize,proto3" json:"ciphertext_size,omitempty"`
+	Reports         []*ProofReport         `protobuf:"bytes,8,rep,name=reports,proto3" json:"reports,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ProofEvidence) Reset() {
+	*x = ProofEvidence{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProofEvidence) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProofEvidence) ProtoMessage() {}
+
+func (x *ProofEvidence) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProofEvidence.ProtoReflect.Descriptor instead.
+func (*ProofEvidence) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ProofEvidence) GetSpaceId() string {
+	if x != nil {
+		return x.SpaceId
+	}
+	return ""
+}
+
+func (x *ProofEvidence) GetOperationId() string {
+	if x != nil {
+		return x.OperationId
+	}
+	return ""
+}
+
+func (x *ProofEvidence) GetSequence() uint64 {
+	if x != nil {
+		return x.Sequence
+	}
+	return 0
+}
+
+func (x *ProofEvidence) GetDigest() string {
+	if x != nil {
+		return x.Digest
+	}
+	return ""
+}
+
+func (x *ProofEvidence) GetKeyEpoch() uint64 {
+	if x != nil {
+		return x.KeyEpoch
+	}
+	return 0
+}
+
+func (x *ProofEvidence) GetMembershipEpoch() uint64 {
+	if x != nil {
+		return x.MembershipEpoch
+	}
+	return 0
+}
+
+func (x *ProofEvidence) GetCiphertextSize() uint64 {
+	if x != nil {
+		return x.CiphertextSize
+	}
+	return 0
+}
+
+func (x *ProofEvidence) GetReports() []*ProofReport {
+	if x != nil {
+		return x.Reports
+	}
+	return nil
+}
+
 type AppendConfig struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Retention         *RetentionPolicy       `protobuf:"bytes,1,opt,name=retention,proto3" json:"retention,omitempty"`
@@ -571,7 +967,7 @@ type AppendConfig struct {
 
 func (x *AppendConfig) Reset() {
 	*x = AppendConfig{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[7]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -583,7 +979,7 @@ func (x *AppendConfig) String() string {
 func (*AppendConfig) ProtoMessage() {}
 
 func (x *AppendConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[7]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -596,7 +992,7 @@ func (x *AppendConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppendConfig.ProtoReflect.Descriptor instead.
 func (*AppendConfig) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{7}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *AppendConfig) GetRetention() *RetentionPolicy {
@@ -622,7 +1018,7 @@ type AppendInput struct {
 
 func (x *AppendInput) Reset() {
 	*x = AppendInput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[8]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -634,7 +1030,7 @@ func (x *AppendInput) String() string {
 func (*AppendInput) ProtoMessage() {}
 
 func (x *AppendInput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[8]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -647,7 +1043,7 @@ func (x *AppendInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppendInput.ProtoReflect.Descriptor instead.
 func (*AppendInput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{8}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *AppendInput) GetOperation() *EncryptedOperation {
@@ -667,7 +1063,7 @@ type AppendOutput struct {
 
 func (x *AppendOutput) Reset() {
 	*x = AppendOutput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[9]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -679,7 +1075,7 @@ func (x *AppendOutput) String() string {
 func (*AppendOutput) ProtoMessage() {}
 
 func (x *AppendOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[9]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -692,7 +1088,7 @@ func (x *AppendOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppendOutput.ProtoReflect.Descriptor instead.
 func (*AppendOutput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{9}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *AppendOutput) GetCommitment() *OperationCommitment {
@@ -709,6 +1105,342 @@ func (x *AppendOutput) GetVerification() *VerificationReport {
 	return nil
 }
 
+type AppendVerifiedConfig struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Retention     *RetentionPolicy       `protobuf:"bytes,1,opt,name=retention,proto3" json:"retention,omitempty"`
+	Policy        *ProofPolicyConfig     `protobuf:"bytes,2,opt,name=policy,proto3" json:"policy,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AppendVerifiedConfig) Reset() {
+	*x = AppendVerifiedConfig{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppendVerifiedConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppendVerifiedConfig) ProtoMessage() {}
+
+func (x *AppendVerifiedConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppendVerifiedConfig.ProtoReflect.Descriptor instead.
+func (*AppendVerifiedConfig) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *AppendVerifiedConfig) GetRetention() *RetentionPolicy {
+	if x != nil {
+		return x.Retention
+	}
+	return nil
+}
+
+func (x *AppendVerifiedConfig) GetPolicy() *ProofPolicyConfig {
+	if x != nil {
+		return x.Policy
+	}
+	return nil
+}
+
+type AppendVerifiedInput struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Operation          *EncryptedOperation    `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
+	ExpectedCommitment *OperationCommitment   `protobuf:"bytes,2,opt,name=expected_commitment,json=expectedCommitment,proto3" json:"expected_commitment,omitempty"`
+	Membership         *MembershipProof       `protobuf:"bytes,3,opt,name=membership,proto3" json:"membership,omitempty"`
+	Checkpoint         *CheckpointProof       `protobuf:"bytes,4,opt,name=checkpoint,proto3" json:"checkpoint,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *AppendVerifiedInput) Reset() {
+	*x = AppendVerifiedInput{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppendVerifiedInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppendVerifiedInput) ProtoMessage() {}
+
+func (x *AppendVerifiedInput) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppendVerifiedInput.ProtoReflect.Descriptor instead.
+func (*AppendVerifiedInput) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *AppendVerifiedInput) GetOperation() *EncryptedOperation {
+	if x != nil {
+		return x.Operation
+	}
+	return nil
+}
+
+func (x *AppendVerifiedInput) GetExpectedCommitment() *OperationCommitment {
+	if x != nil {
+		return x.ExpectedCommitment
+	}
+	return nil
+}
+
+func (x *AppendVerifiedInput) GetMembership() *MembershipProof {
+	if x != nil {
+		return x.Membership
+	}
+	return nil
+}
+
+func (x *AppendVerifiedInput) GetCheckpoint() *CheckpointProof {
+	if x != nil {
+		return x.Checkpoint
+	}
+	return nil
+}
+
+type AppendVerifiedOutput struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Commitment     *OperationCommitment   `protobuf:"bytes,1,opt,name=commitment,proto3" json:"commitment,omitempty"`
+	Reports        []*ProofReport         `protobuf:"bytes,2,rep,name=reports,proto3" json:"reports,omitempty"`
+	Evidence       *ProofEvidence         `protobuf:"bytes,3,opt,name=evidence,proto3" json:"evidence,omitempty"`
+	AuditEventJson string                 `protobuf:"bytes,4,opt,name=audit_event_json,json=auditEventJson,proto3" json:"audit_event_json,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AppendVerifiedOutput) Reset() {
+	*x = AppendVerifiedOutput{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppendVerifiedOutput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppendVerifiedOutput) ProtoMessage() {}
+
+func (x *AppendVerifiedOutput) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppendVerifiedOutput.ProtoReflect.Descriptor instead.
+func (*AppendVerifiedOutput) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AppendVerifiedOutput) GetCommitment() *OperationCommitment {
+	if x != nil {
+		return x.Commitment
+	}
+	return nil
+}
+
+func (x *AppendVerifiedOutput) GetReports() []*ProofReport {
+	if x != nil {
+		return x.Reports
+	}
+	return nil
+}
+
+func (x *AppendVerifiedOutput) GetEvidence() *ProofEvidence {
+	if x != nil {
+		return x.Evidence
+	}
+	return nil
+}
+
+func (x *AppendVerifiedOutput) GetAuditEventJson() string {
+	if x != nil {
+		return x.AuditEventJson
+	}
+	return ""
+}
+
+type ProofEvidenceConfig struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProofEvidenceConfig) Reset() {
+	*x = ProofEvidenceConfig{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProofEvidenceConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProofEvidenceConfig) ProtoMessage() {}
+
+func (x *ProofEvidenceConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProofEvidenceConfig.ProtoReflect.Descriptor instead.
+func (*ProofEvidenceConfig) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{18}
+}
+
+type ProofEvidenceInput struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Commitment    *OperationCommitment   `protobuf:"bytes,1,opt,name=commitment,proto3" json:"commitment,omitempty"`
+	Reports       []*ProofReport         `protobuf:"bytes,2,rep,name=reports,proto3" json:"reports,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProofEvidenceInput) Reset() {
+	*x = ProofEvidenceInput{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProofEvidenceInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProofEvidenceInput) ProtoMessage() {}
+
+func (x *ProofEvidenceInput) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProofEvidenceInput.ProtoReflect.Descriptor instead.
+func (*ProofEvidenceInput) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ProofEvidenceInput) GetCommitment() *OperationCommitment {
+	if x != nil {
+		return x.Commitment
+	}
+	return nil
+}
+
+func (x *ProofEvidenceInput) GetReports() []*ProofReport {
+	if x != nil {
+		return x.Reports
+	}
+	return nil
+}
+
+type ProofEvidenceOutput struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Evidence       *ProofEvidence         `protobuf:"bytes,1,opt,name=evidence,proto3" json:"evidence,omitempty"`
+	Json           string                 `protobuf:"bytes,2,opt,name=json,proto3" json:"json,omitempty"`
+	AuditEventJson string                 `protobuf:"bytes,3,opt,name=audit_event_json,json=auditEventJson,proto3" json:"audit_event_json,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ProofEvidenceOutput) Reset() {
+	*x = ProofEvidenceOutput{}
+	mi := &file_internal_contracts_spaces_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProofEvidenceOutput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProofEvidenceOutput) ProtoMessage() {}
+
+func (x *ProofEvidenceOutput) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_contracts_spaces_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProofEvidenceOutput.ProtoReflect.Descriptor instead.
+func (*ProofEvidenceOutput) Descriptor() ([]byte, []int) {
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ProofEvidenceOutput) GetEvidence() *ProofEvidence {
+	if x != nil {
+		return x.Evidence
+	}
+	return nil
+}
+
+func (x *ProofEvidenceOutput) GetJson() string {
+	if x != nil {
+		return x.Json
+	}
+	return ""
+}
+
+func (x *ProofEvidenceOutput) GetAuditEventJson() string {
+	if x != nil {
+		return x.AuditEventJson
+	}
+	return ""
+}
+
 type FastForwardConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -717,7 +1449,7 @@ type FastForwardConfig struct {
 
 func (x *FastForwardConfig) Reset() {
 	*x = FastForwardConfig{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[10]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -729,7 +1461,7 @@ func (x *FastForwardConfig) String() string {
 func (*FastForwardConfig) ProtoMessage() {}
 
 func (x *FastForwardConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[10]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -742,7 +1474,7 @@ func (x *FastForwardConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FastForwardConfig.ProtoReflect.Descriptor instead.
 func (*FastForwardConfig) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{10}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{21}
 }
 
 type FastForwardInput struct {
@@ -755,7 +1487,7 @@ type FastForwardInput struct {
 
 func (x *FastForwardInput) Reset() {
 	*x = FastForwardInput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[11]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -767,7 +1499,7 @@ func (x *FastForwardInput) String() string {
 func (*FastForwardInput) ProtoMessage() {}
 
 func (x *FastForwardInput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[11]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -780,7 +1512,7 @@ func (x *FastForwardInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FastForwardInput.ProtoReflect.Descriptor instead.
 func (*FastForwardInput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{11}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *FastForwardInput) GetCommitment() *OperationCommitment {
@@ -807,7 +1539,7 @@ type FastForwardOutput struct {
 
 func (x *FastForwardOutput) Reset() {
 	*x = FastForwardOutput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[12]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -819,7 +1551,7 @@ func (x *FastForwardOutput) String() string {
 func (*FastForwardOutput) ProtoMessage() {}
 
 func (x *FastForwardOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[12]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -832,7 +1564,7 @@ func (x *FastForwardOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FastForwardOutput.ProtoReflect.Descriptor instead.
 func (*FastForwardOutput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{12}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *FastForwardOutput) GetAccepted() bool {
@@ -857,7 +1589,7 @@ type EpochRotateConfig struct {
 
 func (x *EpochRotateConfig) Reset() {
 	*x = EpochRotateConfig{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[13]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -869,7 +1601,7 @@ func (x *EpochRotateConfig) String() string {
 func (*EpochRotateConfig) ProtoMessage() {}
 
 func (x *EpochRotateConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[13]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -882,7 +1614,7 @@ func (x *EpochRotateConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EpochRotateConfig.ProtoReflect.Descriptor instead.
 func (*EpochRotateConfig) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{13}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{24}
 }
 
 type EpochRotateInput struct {
@@ -896,7 +1628,7 @@ type EpochRotateInput struct {
 
 func (x *EpochRotateInput) Reset() {
 	*x = EpochRotateInput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[14]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -908,7 +1640,7 @@ func (x *EpochRotateInput) String() string {
 func (*EpochRotateInput) ProtoMessage() {}
 
 func (x *EpochRotateInput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[14]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -921,7 +1653,7 @@ func (x *EpochRotateInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EpochRotateInput.ProtoReflect.Descriptor instead.
 func (*EpochRotateInput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{14}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *EpochRotateInput) GetSpaceId() string {
@@ -955,7 +1687,7 @@ type EpochRotateOutput struct {
 
 func (x *EpochRotateOutput) Reset() {
 	*x = EpochRotateOutput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[15]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -967,7 +1699,7 @@ func (x *EpochRotateOutput) String() string {
 func (*EpochRotateOutput) ProtoMessage() {}
 
 func (x *EpochRotateOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[15]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -980,7 +1712,7 @@ func (x *EpochRotateOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EpochRotateOutput.ProtoReflect.Descriptor instead.
 func (*EpochRotateOutput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{15}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *EpochRotateOutput) GetKeyEpoch() uint64 {
@@ -1005,7 +1737,7 @@ type MemberUpdateConfig struct {
 
 func (x *MemberUpdateConfig) Reset() {
 	*x = MemberUpdateConfig{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[16]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1017,7 +1749,7 @@ func (x *MemberUpdateConfig) String() string {
 func (*MemberUpdateConfig) ProtoMessage() {}
 
 func (x *MemberUpdateConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[16]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1030,7 +1762,7 @@ func (x *MemberUpdateConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemberUpdateConfig.ProtoReflect.Descriptor instead.
 func (*MemberUpdateConfig) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{16}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{27}
 }
 
 type MemberUpdateInput struct {
@@ -1046,7 +1778,7 @@ type MemberUpdateInput struct {
 
 func (x *MemberUpdateInput) Reset() {
 	*x = MemberUpdateInput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[17]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1058,7 +1790,7 @@ func (x *MemberUpdateInput) String() string {
 func (*MemberUpdateInput) ProtoMessage() {}
 
 func (x *MemberUpdateInput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[17]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1071,7 +1803,7 @@ func (x *MemberUpdateInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemberUpdateInput.ProtoReflect.Descriptor instead.
 func (*MemberUpdateInput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{17}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *MemberUpdateInput) GetSpaceId() string {
@@ -1120,7 +1852,7 @@ type MemberUpdateOutput struct {
 
 func (x *MemberUpdateOutput) Reset() {
 	*x = MemberUpdateOutput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[18]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1132,7 +1864,7 @@ func (x *MemberUpdateOutput) String() string {
 func (*MemberUpdateOutput) ProtoMessage() {}
 
 func (x *MemberUpdateOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[18]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1145,7 +1877,7 @@ func (x *MemberUpdateOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemberUpdateOutput.ProtoReflect.Descriptor instead.
 func (*MemberUpdateOutput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{18}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *MemberUpdateOutput) GetMembershipEpoch() uint64 {
@@ -1177,7 +1909,7 @@ type VerifyMembershipConfig struct {
 
 func (x *VerifyMembershipConfig) Reset() {
 	*x = VerifyMembershipConfig{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[19]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1189,7 +1921,7 @@ func (x *VerifyMembershipConfig) String() string {
 func (*VerifyMembershipConfig) ProtoMessage() {}
 
 func (x *VerifyMembershipConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[19]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1202,7 +1934,7 @@ func (x *VerifyMembershipConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyMembershipConfig.ProtoReflect.Descriptor instead.
 func (*VerifyMembershipConfig) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{19}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{30}
 }
 
 type VerifyMembershipInput struct {
@@ -1219,7 +1951,7 @@ type VerifyMembershipInput struct {
 
 func (x *VerifyMembershipInput) Reset() {
 	*x = VerifyMembershipInput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[20]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1231,7 +1963,7 @@ func (x *VerifyMembershipInput) String() string {
 func (*VerifyMembershipInput) ProtoMessage() {}
 
 func (x *VerifyMembershipInput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[20]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1244,7 +1976,7 @@ func (x *VerifyMembershipInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyMembershipInput.ProtoReflect.Descriptor instead.
 func (*VerifyMembershipInput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{20}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *VerifyMembershipInput) GetGroupId() string {
@@ -1298,7 +2030,7 @@ type VerifyMembershipOutput struct {
 
 func (x *VerifyMembershipOutput) Reset() {
 	*x = VerifyMembershipOutput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[21]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1310,7 +2042,7 @@ func (x *VerifyMembershipOutput) String() string {
 func (*VerifyMembershipOutput) ProtoMessage() {}
 
 func (x *VerifyMembershipOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[21]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1323,7 +2055,7 @@ func (x *VerifyMembershipOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyMembershipOutput.ProtoReflect.Descriptor instead.
 func (*VerifyMembershipOutput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{21}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *VerifyMembershipOutput) GetReport() *VerificationReport {
@@ -1341,7 +2073,7 @@ type VerifyOperationConfig struct {
 
 func (x *VerifyOperationConfig) Reset() {
 	*x = VerifyOperationConfig{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[22]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1353,7 +2085,7 @@ func (x *VerifyOperationConfig) String() string {
 func (*VerifyOperationConfig) ProtoMessage() {}
 
 func (x *VerifyOperationConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[22]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1366,7 +2098,7 @@ func (x *VerifyOperationConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyOperationConfig.ProtoReflect.Descriptor instead.
 func (*VerifyOperationConfig) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{22}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{33}
 }
 
 type VerifyOperationInput struct {
@@ -1382,7 +2114,7 @@ type VerifyOperationInput struct {
 
 func (x *VerifyOperationInput) Reset() {
 	*x = VerifyOperationInput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[23]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1394,7 +2126,7 @@ func (x *VerifyOperationInput) String() string {
 func (*VerifyOperationInput) ProtoMessage() {}
 
 func (x *VerifyOperationInput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[23]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1407,7 +2139,7 @@ func (x *VerifyOperationInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyOperationInput.ProtoReflect.Descriptor instead.
 func (*VerifyOperationInput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{23}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *VerifyOperationInput) GetTranscriptId() string {
@@ -1454,7 +2186,7 @@ type VerifyOperationOutput struct {
 
 func (x *VerifyOperationOutput) Reset() {
 	*x = VerifyOperationOutput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[24]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1466,7 +2198,7 @@ func (x *VerifyOperationOutput) String() string {
 func (*VerifyOperationOutput) ProtoMessage() {}
 
 func (x *VerifyOperationOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[24]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1479,7 +2211,7 @@ func (x *VerifyOperationOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyOperationOutput.ProtoReflect.Descriptor instead.
 func (*VerifyOperationOutput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{24}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *VerifyOperationOutput) GetReport() *VerificationReport {
@@ -1497,7 +2229,7 @@ type VerifyCheckpointConfig struct {
 
 func (x *VerifyCheckpointConfig) Reset() {
 	*x = VerifyCheckpointConfig{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[25]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1509,7 +2241,7 @@ func (x *VerifyCheckpointConfig) String() string {
 func (*VerifyCheckpointConfig) ProtoMessage() {}
 
 func (x *VerifyCheckpointConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[25]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1522,7 +2254,7 @@ func (x *VerifyCheckpointConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyCheckpointConfig.ProtoReflect.Descriptor instead.
 func (*VerifyCheckpointConfig) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{25}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{36}
 }
 
 type VerifyCheckpointInput struct {
@@ -1538,7 +2270,7 @@ type VerifyCheckpointInput struct {
 
 func (x *VerifyCheckpointInput) Reset() {
 	*x = VerifyCheckpointInput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[26]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1550,7 +2282,7 @@ func (x *VerifyCheckpointInput) String() string {
 func (*VerifyCheckpointInput) ProtoMessage() {}
 
 func (x *VerifyCheckpointInput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[26]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1563,7 +2295,7 @@ func (x *VerifyCheckpointInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyCheckpointInput.ProtoReflect.Descriptor instead.
 func (*VerifyCheckpointInput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{26}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *VerifyCheckpointInput) GetCheckpointId() string {
@@ -1610,7 +2342,7 @@ type VerifyCheckpointOutput struct {
 
 func (x *VerifyCheckpointOutput) Reset() {
 	*x = VerifyCheckpointOutput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[27]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1622,7 +2354,7 @@ func (x *VerifyCheckpointOutput) String() string {
 func (*VerifyCheckpointOutput) ProtoMessage() {}
 
 func (x *VerifyCheckpointOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[27]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1635,7 +2367,7 @@ func (x *VerifyCheckpointOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyCheckpointOutput.ProtoReflect.Descriptor instead.
 func (*VerifyCheckpointOutput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{27}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *VerifyCheckpointOutput) GetReport() *VerificationReport {
@@ -1655,7 +2387,7 @@ type VectorReportConfig struct {
 
 func (x *VectorReportConfig) Reset() {
 	*x = VectorReportConfig{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[28]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1667,7 +2399,7 @@ func (x *VectorReportConfig) String() string {
 func (*VectorReportConfig) ProtoMessage() {}
 
 func (x *VectorReportConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[28]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1680,7 +2412,7 @@ func (x *VectorReportConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorReportConfig.ProtoReflect.Descriptor instead.
 func (*VectorReportConfig) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{28}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *VectorReportConfig) GetRequiredDomains() []string {
@@ -1705,7 +2437,7 @@ type VectorReportInput struct {
 
 func (x *VectorReportInput) Reset() {
 	*x = VectorReportInput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[29]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1717,7 +2449,7 @@ func (x *VectorReportInput) String() string {
 func (*VectorReportInput) ProtoMessage() {}
 
 func (x *VectorReportInput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[29]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1730,23 +2462,24 @@ func (x *VectorReportInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorReportInput.ProtoReflect.Descriptor instead.
 func (*VectorReportInput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{29}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{40}
 }
 
 type VectorCoverageRow struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Vector        string                 `protobuf:"bytes,3,opt,name=vector,proto3" json:"vector,omitempty"`
-	Reason        string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
-	Notes         string                 `protobuf:"bytes,5,opt,name=notes,proto3" json:"notes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Domain            string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	Status            string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Vector            string                 `protobuf:"bytes,3,opt,name=vector,proto3" json:"vector,omitempty"`
+	Reason            string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
+	Notes             string                 `protobuf:"bytes,5,opt,name=notes,proto3" json:"notes,omitempty"`
+	NextUpstreamInput string                 `protobuf:"bytes,6,opt,name=next_upstream_input,json=nextUpstreamInput,proto3" json:"next_upstream_input,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *VectorCoverageRow) Reset() {
 	*x = VectorCoverageRow{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[30]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1758,7 +2491,7 @@ func (x *VectorCoverageRow) String() string {
 func (*VectorCoverageRow) ProtoMessage() {}
 
 func (x *VectorCoverageRow) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[30]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1771,7 +2504,7 @@ func (x *VectorCoverageRow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorCoverageRow.ProtoReflect.Descriptor instead.
 func (*VectorCoverageRow) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{30}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *VectorCoverageRow) GetDomain() string {
@@ -1809,6 +2542,13 @@ func (x *VectorCoverageRow) GetNotes() string {
 	return ""
 }
 
+func (x *VectorCoverageRow) GetNextUpstreamInput() string {
+	if x != nil {
+		return x.NextUpstreamInput
+	}
+	return ""
+}
+
 type VectorReportOutput struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	UpstreamTag          string                 `protobuf:"bytes,1,opt,name=upstream_tag,json=upstreamTag,proto3" json:"upstream_tag,omitempty"`
@@ -1823,7 +2563,7 @@ type VectorReportOutput struct {
 
 func (x *VectorReportOutput) Reset() {
 	*x = VectorReportOutput{}
-	mi := &file_internal_contracts_spaces_proto_msgTypes[31]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1835,7 +2575,7 @@ func (x *VectorReportOutput) String() string {
 func (*VectorReportOutput) ProtoMessage() {}
 
 func (x *VectorReportOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_internal_contracts_spaces_proto_msgTypes[31]
+	mi := &file_internal_contracts_spaces_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1848,7 +2588,7 @@ func (x *VectorReportOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VectorReportOutput.ProtoReflect.Descriptor instead.
 func (*VectorReportOutput) Descriptor() ([]byte, []int) {
-	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{31}
+	return file_internal_contracts_spaces_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *VectorReportOutput) GetUpstreamTag() string {
@@ -1905,7 +2645,11 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"\x0eVerifierConfig\x12\x12\n" +
 	"\x04mode\x18\x01 \x01(\tR\x04mode\x12\x1d\n" +
 	"\n" +
-	"allow_fake\x18\x02 \x01(\bR\tallowFake\"\x8e\x01\n" +
+	"allow_fake\x18\x02 \x01(\bR\tallowFake\"\x86\x01\n" +
+	"\x11ProofPolicyConfig\x12\x12\n" +
+	"\x04mode\x18\x01 \x01(\tR\x04mode\x122\n" +
+	"\x15require_vector_backed\x18\x02 \x01(\bR\x13requireVectorBacked\x12)\n" +
+	"\x10deferred_domains\x18\x03 \x03(\tR\x0fdeferredDomains\"\x8e\x01\n" +
 	"\x0fRetentionPolicy\x12%\n" +
 	"\x0emax_operations\x18\x01 \x01(\rR\rmaxOperations\x12\"\n" +
 	"\rmin_key_epoch\x18\x02 \x01(\x04R\vminKeyEpoch\x120\n" +
@@ -1944,7 +2688,36 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"\x06digest\x18\x02 \x01(\tR\x06digest\x12\x1a\n" +
 	"\baccepted\x18\x03 \x01(\bR\baccepted\x12)\n" +
 	"\x10production_ready\x18\x04 \x01(\bR\x0fproductionReady\x12\x12\n" +
-	"\x04mode\x18\x05 \x01(\tR\x04mode\"\x92\x01\n" +
+	"\x04mode\x18\x05 \x01(\tR\x04mode\"\x91\x01\n" +
+	"\vProofReport\x12\x16\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x1a\n" +
+	"\baccepted\x18\x02 \x01(\bR\baccepted\x12)\n" +
+	"\x10production_ready\x18\x03 \x01(\bR\x0fproductionReady\x12#\n" +
+	"\rupstream_path\x18\x04 \x01(\tR\fupstreamPath\"\xc8\x01\n" +
+	"\x0fMembershipProof\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x1b\n" +
+	"\tmember_id\x18\x02 \x01(\tR\bmemberId\x12\x16\n" +
+	"\x06issuer\x18\x03 \x01(\tR\x06issuer\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\x04 \x01(\x03R\texpiresAt\x12!\n" +
+	"\fproof_digest\x18\x05 \x01(\tR\vproofDigest\x12#\n" +
+	"\rupstream_path\x18\x06 \x01(\tR\fupstreamPath\"\xe6\x01\n" +
+	"\x0fCheckpointProof\x12#\n" +
+	"\rcheckpoint_id\x18\x01 \x01(\tR\fcheckpointId\x12\x1b\n" +
+	"\ttree_head\x18\x02 \x01(\tR\btreeHead\x12\x1b\n" +
+	"\ttree_size\x18\x03 \x01(\x04R\btreeSize\x12!\n" +
+	"\fproof_digest\x18\x04 \x01(\tR\vproofDigest\x12#\n" +
+	"\rupstream_path\x18\x05 \x01(\tR\fupstreamPath\x12,\n" +
+	"\x12previous_tree_size\x18\x06 \x01(\x04R\x10previousTreeSize\"\xbe\x02\n" +
+	"\rProofEvidence\x12\x19\n" +
+	"\bspace_id\x18\x01 \x01(\tR\aspaceId\x12!\n" +
+	"\foperation_id\x18\x02 \x01(\tR\voperationId\x12\x1a\n" +
+	"\bsequence\x18\x03 \x01(\x04R\bsequence\x12\x16\n" +
+	"\x06digest\x18\x04 \x01(\tR\x06digest\x12\x1b\n" +
+	"\tkey_epoch\x18\x05 \x01(\x04R\bkeyEpoch\x12)\n" +
+	"\x10membership_epoch\x18\x06 \x01(\x04R\x0fmembershipEpoch\x12'\n" +
+	"\x0fciphertext_size\x18\a \x01(\x04R\x0eciphertextSize\x12J\n" +
+	"\areports\x18\b \x03(\v20.workflow.plugins.encryptedspaces.v1.ProofReportR\areports\"\x92\x01\n" +
 	"\fAppendConfig\x12R\n" +
 	"\tretention\x18\x01 \x01(\v24.workflow.plugins.encryptedspaces.v1.RetentionPolicyR\tretention\x12.\n" +
 	"\x13allow_fake_verifier\x18\x02 \x01(\bR\x11allowFakeVerifier\"d\n" +
@@ -1954,7 +2727,36 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"\n" +
 	"commitment\x18\x01 \x01(\v28.workflow.plugins.encryptedspaces.v1.OperationCommitmentR\n" +
 	"commitment\x12[\n" +
-	"\fverification\x18\x02 \x01(\v27.workflow.plugins.encryptedspaces.v1.VerificationReportR\fverification\"\x13\n" +
+	"\fverification\x18\x02 \x01(\v27.workflow.plugins.encryptedspaces.v1.VerificationReportR\fverification\"\xba\x01\n" +
+	"\x14AppendVerifiedConfig\x12R\n" +
+	"\tretention\x18\x01 \x01(\v24.workflow.plugins.encryptedspaces.v1.RetentionPolicyR\tretention\x12N\n" +
+	"\x06policy\x18\x02 \x01(\v26.workflow.plugins.encryptedspaces.v1.ProofPolicyConfigR\x06policy\"\x83\x03\n" +
+	"\x13AppendVerifiedInput\x12U\n" +
+	"\toperation\x18\x01 \x01(\v27.workflow.plugins.encryptedspaces.v1.EncryptedOperationR\toperation\x12i\n" +
+	"\x13expected_commitment\x18\x02 \x01(\v28.workflow.plugins.encryptedspaces.v1.OperationCommitmentR\x12expectedCommitment\x12T\n" +
+	"\n" +
+	"membership\x18\x03 \x01(\v24.workflow.plugins.encryptedspaces.v1.MembershipProofR\n" +
+	"membership\x12T\n" +
+	"\n" +
+	"checkpoint\x18\x04 \x01(\v24.workflow.plugins.encryptedspaces.v1.CheckpointProofR\n" +
+	"checkpoint\"\xb6\x02\n" +
+	"\x14AppendVerifiedOutput\x12X\n" +
+	"\n" +
+	"commitment\x18\x01 \x01(\v28.workflow.plugins.encryptedspaces.v1.OperationCommitmentR\n" +
+	"commitment\x12J\n" +
+	"\areports\x18\x02 \x03(\v20.workflow.plugins.encryptedspaces.v1.ProofReportR\areports\x12N\n" +
+	"\bevidence\x18\x03 \x01(\v22.workflow.plugins.encryptedspaces.v1.ProofEvidenceR\bevidence\x12(\n" +
+	"\x10audit_event_json\x18\x04 \x01(\tR\x0eauditEventJson\"\x15\n" +
+	"\x13ProofEvidenceConfig\"\xba\x01\n" +
+	"\x12ProofEvidenceInput\x12X\n" +
+	"\n" +
+	"commitment\x18\x01 \x01(\v28.workflow.plugins.encryptedspaces.v1.OperationCommitmentR\n" +
+	"commitment\x12J\n" +
+	"\areports\x18\x02 \x03(\v20.workflow.plugins.encryptedspaces.v1.ProofReportR\areports\"\xa3\x01\n" +
+	"\x13ProofEvidenceOutput\x12N\n" +
+	"\bevidence\x18\x01 \x01(\v22.workflow.plugins.encryptedspaces.v1.ProofEvidenceR\bevidence\x12\x12\n" +
+	"\x04json\x18\x02 \x01(\tR\x04json\x12(\n" +
+	"\x10audit_event_json\x18\x03 \x01(\tR\x0eauditEventJson\"\x13\n" +
 	"\x11FastForwardConfig\"\xc8\x01\n" +
 	"\x10FastForwardInput\x12X\n" +
 	"\n" +
@@ -2017,13 +2819,14 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"\x12VectorReportConfig\x12)\n" +
 	"\x10required_domains\x18\x01 \x03(\tR\x0frequiredDomains\x12D\n" +
 	"\x1erequire_production_equivalence\x18\x02 \x01(\bR\x1crequireProductionEquivalence\"\x13\n" +
-	"\x11VectorReportInput\"\x89\x01\n" +
+	"\x11VectorReportInput\"\xb9\x01\n" +
 	"\x11VectorCoverageRow\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x16\n" +
 	"\x06vector\x18\x03 \x01(\tR\x06vector\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\x12\x14\n" +
-	"\x05notes\x18\x05 \x01(\tR\x05notes\"\xa9\x02\n" +
+	"\x05notes\x18\x05 \x01(\tR\x05notes\x12.\n" +
+	"\x13next_upstream_input\x18\x06 \x01(\tR\x11nextUpstreamInput\"\xa9\x02\n" +
 	"\x12VectorReportOutput\x12!\n" +
 	"\fupstream_tag\x18\x01 \x01(\tR\vupstreamTag\x123\n" +
 	"\x15production_equivalent\x18\x02 \x01(\bR\x14productionEquivalent\x12J\n" +
@@ -2044,57 +2847,81 @@ func file_internal_contracts_spaces_proto_rawDescGZIP() []byte {
 	return file_internal_contracts_spaces_proto_rawDescData
 }
 
-var file_internal_contracts_spaces_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_internal_contracts_spaces_proto_msgTypes = make([]protoimpl.MessageInfo, 43)
 var file_internal_contracts_spaces_proto_goTypes = []any{
 	(*SpaceStoreConfig)(nil),       // 0: workflow.plugins.encryptedspaces.v1.SpaceStoreConfig
 	(*VerifierConfig)(nil),         // 1: workflow.plugins.encryptedspaces.v1.VerifierConfig
-	(*RetentionPolicy)(nil),        // 2: workflow.plugins.encryptedspaces.v1.RetentionPolicy
-	(*EncryptedOperation)(nil),     // 3: workflow.plugins.encryptedspaces.v1.EncryptedOperation
-	(*OperationCommitment)(nil),    // 4: workflow.plugins.encryptedspaces.v1.OperationCommitment
-	(*FastForwardCheckpoint)(nil),  // 5: workflow.plugins.encryptedspaces.v1.FastForwardCheckpoint
-	(*VerificationReport)(nil),     // 6: workflow.plugins.encryptedspaces.v1.VerificationReport
-	(*AppendConfig)(nil),           // 7: workflow.plugins.encryptedspaces.v1.AppendConfig
-	(*AppendInput)(nil),            // 8: workflow.plugins.encryptedspaces.v1.AppendInput
-	(*AppendOutput)(nil),           // 9: workflow.plugins.encryptedspaces.v1.AppendOutput
-	(*FastForwardConfig)(nil),      // 10: workflow.plugins.encryptedspaces.v1.FastForwardConfig
-	(*FastForwardInput)(nil),       // 11: workflow.plugins.encryptedspaces.v1.FastForwardInput
-	(*FastForwardOutput)(nil),      // 12: workflow.plugins.encryptedspaces.v1.FastForwardOutput
-	(*EpochRotateConfig)(nil),      // 13: workflow.plugins.encryptedspaces.v1.EpochRotateConfig
-	(*EpochRotateInput)(nil),       // 14: workflow.plugins.encryptedspaces.v1.EpochRotateInput
-	(*EpochRotateOutput)(nil),      // 15: workflow.plugins.encryptedspaces.v1.EpochRotateOutput
-	(*MemberUpdateConfig)(nil),     // 16: workflow.plugins.encryptedspaces.v1.MemberUpdateConfig
-	(*MemberUpdateInput)(nil),      // 17: workflow.plugins.encryptedspaces.v1.MemberUpdateInput
-	(*MemberUpdateOutput)(nil),     // 18: workflow.plugins.encryptedspaces.v1.MemberUpdateOutput
-	(*VerifyMembershipConfig)(nil), // 19: workflow.plugins.encryptedspaces.v1.VerifyMembershipConfig
-	(*VerifyMembershipInput)(nil),  // 20: workflow.plugins.encryptedspaces.v1.VerifyMembershipInput
-	(*VerifyMembershipOutput)(nil), // 21: workflow.plugins.encryptedspaces.v1.VerifyMembershipOutput
-	(*VerifyOperationConfig)(nil),  // 22: workflow.plugins.encryptedspaces.v1.VerifyOperationConfig
-	(*VerifyOperationInput)(nil),   // 23: workflow.plugins.encryptedspaces.v1.VerifyOperationInput
-	(*VerifyOperationOutput)(nil),  // 24: workflow.plugins.encryptedspaces.v1.VerifyOperationOutput
-	(*VerifyCheckpointConfig)(nil), // 25: workflow.plugins.encryptedspaces.v1.VerifyCheckpointConfig
-	(*VerifyCheckpointInput)(nil),  // 26: workflow.plugins.encryptedspaces.v1.VerifyCheckpointInput
-	(*VerifyCheckpointOutput)(nil), // 27: workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput
-	(*VectorReportConfig)(nil),     // 28: workflow.plugins.encryptedspaces.v1.VectorReportConfig
-	(*VectorReportInput)(nil),      // 29: workflow.plugins.encryptedspaces.v1.VectorReportInput
-	(*VectorCoverageRow)(nil),      // 30: workflow.plugins.encryptedspaces.v1.VectorCoverageRow
-	(*VectorReportOutput)(nil),     // 31: workflow.plugins.encryptedspaces.v1.VectorReportOutput
+	(*ProofPolicyConfig)(nil),      // 2: workflow.plugins.encryptedspaces.v1.ProofPolicyConfig
+	(*RetentionPolicy)(nil),        // 3: workflow.plugins.encryptedspaces.v1.RetentionPolicy
+	(*EncryptedOperation)(nil),     // 4: workflow.plugins.encryptedspaces.v1.EncryptedOperation
+	(*OperationCommitment)(nil),    // 5: workflow.plugins.encryptedspaces.v1.OperationCommitment
+	(*FastForwardCheckpoint)(nil),  // 6: workflow.plugins.encryptedspaces.v1.FastForwardCheckpoint
+	(*VerificationReport)(nil),     // 7: workflow.plugins.encryptedspaces.v1.VerificationReport
+	(*ProofReport)(nil),            // 8: workflow.plugins.encryptedspaces.v1.ProofReport
+	(*MembershipProof)(nil),        // 9: workflow.plugins.encryptedspaces.v1.MembershipProof
+	(*CheckpointProof)(nil),        // 10: workflow.plugins.encryptedspaces.v1.CheckpointProof
+	(*ProofEvidence)(nil),          // 11: workflow.plugins.encryptedspaces.v1.ProofEvidence
+	(*AppendConfig)(nil),           // 12: workflow.plugins.encryptedspaces.v1.AppendConfig
+	(*AppendInput)(nil),            // 13: workflow.plugins.encryptedspaces.v1.AppendInput
+	(*AppendOutput)(nil),           // 14: workflow.plugins.encryptedspaces.v1.AppendOutput
+	(*AppendVerifiedConfig)(nil),   // 15: workflow.plugins.encryptedspaces.v1.AppendVerifiedConfig
+	(*AppendVerifiedInput)(nil),    // 16: workflow.plugins.encryptedspaces.v1.AppendVerifiedInput
+	(*AppendVerifiedOutput)(nil),   // 17: workflow.plugins.encryptedspaces.v1.AppendVerifiedOutput
+	(*ProofEvidenceConfig)(nil),    // 18: workflow.plugins.encryptedspaces.v1.ProofEvidenceConfig
+	(*ProofEvidenceInput)(nil),     // 19: workflow.plugins.encryptedspaces.v1.ProofEvidenceInput
+	(*ProofEvidenceOutput)(nil),    // 20: workflow.plugins.encryptedspaces.v1.ProofEvidenceOutput
+	(*FastForwardConfig)(nil),      // 21: workflow.plugins.encryptedspaces.v1.FastForwardConfig
+	(*FastForwardInput)(nil),       // 22: workflow.plugins.encryptedspaces.v1.FastForwardInput
+	(*FastForwardOutput)(nil),      // 23: workflow.plugins.encryptedspaces.v1.FastForwardOutput
+	(*EpochRotateConfig)(nil),      // 24: workflow.plugins.encryptedspaces.v1.EpochRotateConfig
+	(*EpochRotateInput)(nil),       // 25: workflow.plugins.encryptedspaces.v1.EpochRotateInput
+	(*EpochRotateOutput)(nil),      // 26: workflow.plugins.encryptedspaces.v1.EpochRotateOutput
+	(*MemberUpdateConfig)(nil),     // 27: workflow.plugins.encryptedspaces.v1.MemberUpdateConfig
+	(*MemberUpdateInput)(nil),      // 28: workflow.plugins.encryptedspaces.v1.MemberUpdateInput
+	(*MemberUpdateOutput)(nil),     // 29: workflow.plugins.encryptedspaces.v1.MemberUpdateOutput
+	(*VerifyMembershipConfig)(nil), // 30: workflow.plugins.encryptedspaces.v1.VerifyMembershipConfig
+	(*VerifyMembershipInput)(nil),  // 31: workflow.plugins.encryptedspaces.v1.VerifyMembershipInput
+	(*VerifyMembershipOutput)(nil), // 32: workflow.plugins.encryptedspaces.v1.VerifyMembershipOutput
+	(*VerifyOperationConfig)(nil),  // 33: workflow.plugins.encryptedspaces.v1.VerifyOperationConfig
+	(*VerifyOperationInput)(nil),   // 34: workflow.plugins.encryptedspaces.v1.VerifyOperationInput
+	(*VerifyOperationOutput)(nil),  // 35: workflow.plugins.encryptedspaces.v1.VerifyOperationOutput
+	(*VerifyCheckpointConfig)(nil), // 36: workflow.plugins.encryptedspaces.v1.VerifyCheckpointConfig
+	(*VerifyCheckpointInput)(nil),  // 37: workflow.plugins.encryptedspaces.v1.VerifyCheckpointInput
+	(*VerifyCheckpointOutput)(nil), // 38: workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput
+	(*VectorReportConfig)(nil),     // 39: workflow.plugins.encryptedspaces.v1.VectorReportConfig
+	(*VectorReportInput)(nil),      // 40: workflow.plugins.encryptedspaces.v1.VectorReportInput
+	(*VectorCoverageRow)(nil),      // 41: workflow.plugins.encryptedspaces.v1.VectorCoverageRow
+	(*VectorReportOutput)(nil),     // 42: workflow.plugins.encryptedspaces.v1.VectorReportOutput
 }
 var file_internal_contracts_spaces_proto_depIdxs = []int32{
-	2,  // 0: workflow.plugins.encryptedspaces.v1.AppendConfig.retention:type_name -> workflow.plugins.encryptedspaces.v1.RetentionPolicy
-	3,  // 1: workflow.plugins.encryptedspaces.v1.AppendInput.operation:type_name -> workflow.plugins.encryptedspaces.v1.EncryptedOperation
-	4,  // 2: workflow.plugins.encryptedspaces.v1.AppendOutput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
-	6,  // 3: workflow.plugins.encryptedspaces.v1.AppendOutput.verification:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
-	4,  // 4: workflow.plugins.encryptedspaces.v1.FastForwardInput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
-	5,  // 5: workflow.plugins.encryptedspaces.v1.FastForwardInput.checkpoint:type_name -> workflow.plugins.encryptedspaces.v1.FastForwardCheckpoint
-	6,  // 6: workflow.plugins.encryptedspaces.v1.VerifyMembershipOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
-	6,  // 7: workflow.plugins.encryptedspaces.v1.VerifyOperationOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
-	6,  // 8: workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
-	30, // 9: workflow.plugins.encryptedspaces.v1.VectorReportOutput.rows:type_name -> workflow.plugins.encryptedspaces.v1.VectorCoverageRow
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	8,  // 0: workflow.plugins.encryptedspaces.v1.ProofEvidence.reports:type_name -> workflow.plugins.encryptedspaces.v1.ProofReport
+	3,  // 1: workflow.plugins.encryptedspaces.v1.AppendConfig.retention:type_name -> workflow.plugins.encryptedspaces.v1.RetentionPolicy
+	4,  // 2: workflow.plugins.encryptedspaces.v1.AppendInput.operation:type_name -> workflow.plugins.encryptedspaces.v1.EncryptedOperation
+	5,  // 3: workflow.plugins.encryptedspaces.v1.AppendOutput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
+	7,  // 4: workflow.plugins.encryptedspaces.v1.AppendOutput.verification:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
+	3,  // 5: workflow.plugins.encryptedspaces.v1.AppendVerifiedConfig.retention:type_name -> workflow.plugins.encryptedspaces.v1.RetentionPolicy
+	2,  // 6: workflow.plugins.encryptedspaces.v1.AppendVerifiedConfig.policy:type_name -> workflow.plugins.encryptedspaces.v1.ProofPolicyConfig
+	4,  // 7: workflow.plugins.encryptedspaces.v1.AppendVerifiedInput.operation:type_name -> workflow.plugins.encryptedspaces.v1.EncryptedOperation
+	5,  // 8: workflow.plugins.encryptedspaces.v1.AppendVerifiedInput.expected_commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
+	9,  // 9: workflow.plugins.encryptedspaces.v1.AppendVerifiedInput.membership:type_name -> workflow.plugins.encryptedspaces.v1.MembershipProof
+	10, // 10: workflow.plugins.encryptedspaces.v1.AppendVerifiedInput.checkpoint:type_name -> workflow.plugins.encryptedspaces.v1.CheckpointProof
+	5,  // 11: workflow.plugins.encryptedspaces.v1.AppendVerifiedOutput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
+	8,  // 12: workflow.plugins.encryptedspaces.v1.AppendVerifiedOutput.reports:type_name -> workflow.plugins.encryptedspaces.v1.ProofReport
+	11, // 13: workflow.plugins.encryptedspaces.v1.AppendVerifiedOutput.evidence:type_name -> workflow.plugins.encryptedspaces.v1.ProofEvidence
+	5,  // 14: workflow.plugins.encryptedspaces.v1.ProofEvidenceInput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
+	8,  // 15: workflow.plugins.encryptedspaces.v1.ProofEvidenceInput.reports:type_name -> workflow.plugins.encryptedspaces.v1.ProofReport
+	11, // 16: workflow.plugins.encryptedspaces.v1.ProofEvidenceOutput.evidence:type_name -> workflow.plugins.encryptedspaces.v1.ProofEvidence
+	5,  // 17: workflow.plugins.encryptedspaces.v1.FastForwardInput.commitment:type_name -> workflow.plugins.encryptedspaces.v1.OperationCommitment
+	6,  // 18: workflow.plugins.encryptedspaces.v1.FastForwardInput.checkpoint:type_name -> workflow.plugins.encryptedspaces.v1.FastForwardCheckpoint
+	7,  // 19: workflow.plugins.encryptedspaces.v1.VerifyMembershipOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
+	7,  // 20: workflow.plugins.encryptedspaces.v1.VerifyOperationOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
+	7,  // 21: workflow.plugins.encryptedspaces.v1.VerifyCheckpointOutput.report:type_name -> workflow.plugins.encryptedspaces.v1.VerificationReport
+	41, // 22: workflow.plugins.encryptedspaces.v1.VectorReportOutput.rows:type_name -> workflow.plugins.encryptedspaces.v1.VectorCoverageRow
+	23, // [23:23] is the sub-list for method output_type
+	23, // [23:23] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_internal_contracts_spaces_proto_init() }
@@ -2108,7 +2935,7 @@ func file_internal_contracts_spaces_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_internal_contracts_spaces_proto_rawDesc), len(file_internal_contracts_spaces_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   32,
+			NumMessages:   43,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

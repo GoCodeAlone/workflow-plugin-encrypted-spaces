@@ -1,0 +1,31 @@
+modules:
+  - name: encrypted_space_store
+    type: encrypted_space.store
+    config:
+      typed:
+        space_id: space-1
+        backend: memory
+        max_operations: 128
+  - name: encrypted_space_policy
+    type: encrypted_space.proof_policy
+    config:
+      typed:
+        mode: vector-backed
+        require_vector_backed: true
+        deferred_domains:
+          - message-backup
+          - svr-svrb
+
+workflows:
+  - name: encrypted_space_verified_append
+    steps:
+      - name: append_verified
+        type: step.encrypted_space_append_verified
+      - name: proof_evidence
+        type: step.encrypted_space_proof_evidence
+      - name: room_members
+        type: step.room_members
+      - name: emit
+        type: step.eventbus.publish
+      - name: audit
+        type: step.audit_annotate
