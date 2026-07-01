@@ -5,9 +5,28 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PLUGIN_NAME="workflow-plugin-encrypted-spaces"
 PLUGIN_DIR="$ROOT/.wfctl/test-plugins"
 WFCTL="${WFCTL:-}"
-WORKFLOW_REPO="${WORKFLOW_REPO:-$ROOT/../workflow}"
+WORKFLOW_REPO="${WORKFLOW_REPO:-}"
+
+find_workflow_repo() {
+  if [[ -n "$WORKFLOW_REPO" ]]; then
+    [[ -d "$WORKFLOW_REPO" ]] && printf '%s\n' "$WORKFLOW_REPO" && return 0
+    return 1
+  fi
+  local candidate
+  for candidate in "$ROOT/../workflow" "$ROOT/../../../workflow"; do
+    if [[ -d "$candidate" ]]; then
+      printf '%s\n' "$candidate"
+      return 0
+    fi
+  done
+  return 1
+}
 
 if [[ -z "$WFCTL" ]]; then
+  WORKFLOW_REPO="$(find_workflow_repo)" || {
+    echo "workflow repo not found; set WFCTL or WORKFLOW_REPO" >&2
+    exit 1
+  }
   if [[ -x "$WORKFLOW_REPO/bin/wfctl" ]]; then
     WFCTL="$WORKFLOW_REPO/bin/wfctl"
   else
