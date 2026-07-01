@@ -15,6 +15,12 @@ message VerifierConfig {
   bool allow_fake = 2;
 }
 
+message ProofPolicyConfig {
+  string mode = 1;
+  bool require_vector_backed = 2;
+  repeated string deferred_domains = 3;
+}
+
 message RetentionPolicy {
   uint32 max_operations = 1;
   uint64 min_key_epoch = 2;
@@ -61,6 +67,42 @@ message VerificationReport {
   string mode = 5;
 }
 
+message ProofReport {
+  string domain = 1;
+  bool accepted = 2;
+  bool production_ready = 3;
+  string upstream_path = 4;
+}
+
+message MembershipProof {
+  string group_id = 1;
+  string member_id = 2;
+  string issuer = 3;
+  int64 expires_at = 4;
+  string proof_digest = 5;
+  string upstream_path = 6;
+}
+
+message CheckpointProof {
+  string checkpoint_id = 1;
+  string tree_head = 2;
+  uint64 tree_size = 3;
+  string proof_digest = 4;
+  string upstream_path = 5;
+  uint64 previous_tree_size = 6;
+}
+
+message ProofEvidence {
+  string space_id = 1;
+  string operation_id = 2;
+  uint64 sequence = 3;
+  string digest = 4;
+  uint64 key_epoch = 5;
+  uint64 membership_epoch = 6;
+  uint64 ciphertext_size = 7;
+  repeated ProofReport reports = 8;
+}
+
 message AppendConfig {
   RetentionPolicy retention = 1;
   bool allow_fake_verifier = 2;
@@ -73,6 +115,36 @@ message AppendInput {
 message AppendOutput {
   OperationCommitment commitment = 1;
   VerificationReport verification = 2;
+}
+
+message AppendVerifiedConfig {
+  RetentionPolicy retention = 1;
+  ProofPolicyConfig policy = 2;
+}
+
+message AppendVerifiedInput {
+  EncryptedOperation operation = 1;
+  OperationCommitment expected_commitment = 2;
+  MembershipProof membership = 3;
+  CheckpointProof checkpoint = 4;
+}
+
+message AppendVerifiedOutput {
+  OperationCommitment commitment = 1;
+  repeated ProofReport reports = 2;
+  ProofEvidence evidence = 3;
+}
+
+message ProofEvidenceConfig {}
+
+message ProofEvidenceInput {
+  OperationCommitment commitment = 1;
+  repeated ProofReport reports = 2;
+}
+
+message ProofEvidenceOutput {
+  ProofEvidence evidence = 1;
+  string json = 2;
 }
 
 message FastForwardConfig {}
@@ -172,6 +244,7 @@ message VectorCoverageRow {
   string vector = 3;
   string reason = 4;
   string notes = 5;
+  string next_upstream_input = 6;
 }
 
 message VectorReportOutput {

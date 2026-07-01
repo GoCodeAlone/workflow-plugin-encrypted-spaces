@@ -12,7 +12,7 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-func TestEncryptedSpacesProviderDeclaresStrictScaffoldContracts(t *testing.T) {
+func TestEncryptedSpacesProviderContractsDeclareStrictScaffoldContracts(t *testing.T) {
 	provider := NewEncryptedSpacesProvider()
 	moduleProvider, ok := any(provider).(sdk.TypedModuleProvider)
 	if !ok {
@@ -28,14 +28,17 @@ func TestEncryptedSpacesProviderDeclaresStrictScaffoldContracts(t *testing.T) {
 	}
 
 	assertStringSet(t, moduleProvider.TypedModuleTypes(), []string{
+		"encrypted_space.proof_policy",
 		"encrypted_space.store",
 		"encrypted_space.verifier",
 	})
 	assertStringSet(t, stepProvider.TypedStepTypes(), []string{
 		"step.encrypted_space_append",
+		"step.encrypted_space_append_verified",
 		"step.encrypted_space_fast_forward",
 		"step.encrypted_space_epoch_rotate",
 		"step.encrypted_space_member_update",
+		"step.encrypted_space_proof_evidence",
 		"step.encrypted_space_verify_membership",
 		"step.encrypted_space_verify_operation",
 		"step.encrypted_space_verify_checkpoint",
@@ -78,12 +81,15 @@ func TestEncryptedSpacesProviderDeclaresStrictScaffoldContracts(t *testing.T) {
 	}
 
 	for _, key := range []string{
+		"module:encrypted_space.proof_policy",
 		"module:encrypted_space.store",
 		"module:encrypted_space.verifier",
 		"step:step.encrypted_space_append",
+		"step:step.encrypted_space_append_verified",
 		"step:step.encrypted_space_fast_forward",
 		"step:step.encrypted_space_epoch_rotate",
 		"step:step.encrypted_space_member_update",
+		"step:step.encrypted_space_proof_evidence",
 		"step:step.encrypted_space_verify_membership",
 		"step:step.encrypted_space_verify_operation",
 		"step:step.encrypted_space_verify_checkpoint",

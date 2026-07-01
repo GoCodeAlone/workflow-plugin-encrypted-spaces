@@ -110,11 +110,12 @@ func ExecuteEncryptedSpaceVectorReport(
 			delete(required, row.Domain)
 		}
 		contractRow := &contracts.VectorCoverageRow{
-			Domain: row.Domain,
-			Status: row.Status,
-			Vector: row.Vector,
-			Reason: row.Reason,
-			Notes:  row.Notes,
+			Domain:            row.Domain,
+			Status:            row.Status,
+			Vector:            row.Vector,
+			Reason:            row.Reason,
+			Notes:             row.Notes,
+			NextUpstreamInput: row.NextUpstreamInput,
 		}
 		output.Rows = append(output.Rows, contractRow)
 		if row.Status != "vector-backed" {

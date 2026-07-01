@@ -35,15 +35,18 @@ func (p *EncryptedSpacesProvider) Manifest() sdk.PluginManifest {
 }
 
 var encryptedSpacesModuleTypes = []string{
+	"encrypted_space.proof_policy",
 	"encrypted_space.store",
 	"encrypted_space.verifier",
 }
 
 var encryptedSpacesStepTypes = []string{
 	"step.encrypted_space_append",
+	"step.encrypted_space_append_verified",
 	"step.encrypted_space_fast_forward",
 	"step.encrypted_space_epoch_rotate",
 	"step.encrypted_space_member_update",
+	"step.encrypted_space_proof_evidence",
 	"step.encrypted_space_verify_membership",
 	"step.encrypted_space_verify_operation",
 	"step.encrypted_space_verify_checkpoint",
@@ -58,6 +61,11 @@ func (p *EncryptedSpacesProvider) TypedModuleTypes() []string {
 // CreateTypedModule implements sdk.TypedModuleProvider.
 func (p *EncryptedSpacesProvider) CreateTypedModule(typeName, name string, config *anypb.Any) (sdk.ModuleInstance, error) {
 	switch typeName {
+	case "encrypted_space.proof_policy":
+		factory := sdk.NewTypedModuleFactory(typeName, &contracts.ProofPolicyConfig{}, func(name string, cfg *contracts.ProofPolicyConfig) (sdk.ModuleInstance, error) {
+			return &spacesModule{name: name}, nil
+		})
+		return factory.CreateTypedModule(typeName, name, config)
 	case "encrypted_space.store":
 		factory := sdk.NewTypedModuleFactory(typeName, &contracts.SpaceStoreConfig{}, func(name string, cfg *contracts.SpaceStoreConfig) (sdk.ModuleInstance, error) {
 			return &spacesModule{name: name}, nil
@@ -88,6 +96,14 @@ func (p *EncryptedSpacesProvider) CreateTypedStep(typeName, name string, config 
 			ExecuteEncryptedSpaceAppend,
 		)
 		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_append_verified":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.AppendVerifiedConfig{},
+			&contracts.AppendVerifiedInput{},
+			ExecuteEncryptedSpaceAppendVerified,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
 	case "step.encrypted_space_fast_forward":
 		factory := sdk.NewTypedStepFactory(
 			typeName,
@@ -110,6 +126,14 @@ func (p *EncryptedSpacesProvider) CreateTypedStep(typeName, name string, config 
 			&contracts.MemberUpdateConfig{},
 			&contracts.MemberUpdateInput{},
 			ExecuteEncryptedSpaceMemberUpdate,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_proof_evidence":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.ProofEvidenceConfig{},
+			&contracts.ProofEvidenceInput{},
+			ExecuteEncryptedSpaceProofEvidence,
 		)
 		return factory.CreateTypedStep(typeName, name, config)
 	case "step.encrypted_space_verify_membership":
@@ -158,12 +182,15 @@ func (p *EncryptedSpacesProvider) ContractRegistry() *pb.ContractRegistry {
 			},
 		},
 		Contracts: []*pb.ContractDescriptor{
+			moduleContract("encrypted_space.proof_policy", pkg+"ProofPolicyConfig"),
 			moduleContract("encrypted_space.store", pkg+"SpaceStoreConfig"),
 			moduleContract("encrypted_space.verifier", pkg+"VerifierConfig"),
 			stepContract("step.encrypted_space_append", pkg+"AppendConfig", pkg+"AppendInput", pkg+"AppendOutput"),
+			stepContract("step.encrypted_space_append_verified", pkg+"AppendVerifiedConfig", pkg+"AppendVerifiedInput", pkg+"AppendVerifiedOutput"),
 			stepContract("step.encrypted_space_fast_forward", pkg+"FastForwardConfig", pkg+"FastForwardInput", pkg+"FastForwardOutput"),
 			stepContract("step.encrypted_space_epoch_rotate", pkg+"EpochRotateConfig", pkg+"EpochRotateInput", pkg+"EpochRotateOutput"),
 			stepContract("step.encrypted_space_member_update", pkg+"MemberUpdateConfig", pkg+"MemberUpdateInput", pkg+"MemberUpdateOutput"),
+			stepContract("step.encrypted_space_proof_evidence", pkg+"ProofEvidenceConfig", pkg+"ProofEvidenceInput", pkg+"ProofEvidenceOutput"),
 			stepContract("step.encrypted_space_verify_membership", pkg+"VerifyMembershipConfig", pkg+"VerifyMembershipInput", pkg+"VerifyMembershipOutput"),
 			stepContract("step.encrypted_space_verify_operation", pkg+"VerifyOperationConfig", pkg+"VerifyOperationInput", pkg+"VerifyOperationOutput"),
 			stepContract("step.encrypted_space_verify_checkpoint", pkg+"VerifyCheckpointConfig", pkg+"VerifyCheckpointInput", pkg+"VerifyCheckpointOutput"),
