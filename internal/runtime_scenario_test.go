@@ -64,4 +64,20 @@ func TestEncryptedSpaceRuntimeScenario(t *testing.T) {
 	if auditMetadata["ciphertext_size"] != uint64(len(testContractOperation("scenario-op-1").GetCiphertext())) {
 		t.Fatalf("ciphertext_size = %v, want ciphertext length", auditMetadata["ciphertext_size"])
 	}
+
+	vectorReport, err := ExecuteEncryptedSpaceVectorReport(ctx, sdk.TypedStepRequest[*contracts.VectorReportConfig, *contracts.VectorReportInput]{
+		Config: &contracts.VectorReportConfig{
+			RequiredDomains: []string{"zkgroup", "message-backup"},
+		},
+		Input: &contracts.VectorReportInput{},
+	})
+	if err != nil {
+		t.Fatalf("vector report: %v", err)
+	}
+	if vectorReport.Output.GetProductionEquivalent() {
+		t.Fatal("runtime scenario claimed production equivalence with message-backup deferred")
+	}
+	if got := vectorReport.Output.GetStatus(); got != "deferred" {
+		t.Fatalf("runtime scenario vector status = %q, want deferred", got)
+	}
 }

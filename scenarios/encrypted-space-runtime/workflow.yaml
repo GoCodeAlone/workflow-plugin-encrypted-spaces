@@ -18,6 +18,14 @@ workflows:
     steps:
       - name: append
         type: step.encrypted_space_append
+      - name: vector_report
+        type: step.encrypted_space_vector_report
+        config:
+          typed:
+            required_domains:
+              - zkgroup
+              - message-backup
+            require_production_equivalence: false
       - name: emit
         type: step.eventbus_publish
       - name: audit

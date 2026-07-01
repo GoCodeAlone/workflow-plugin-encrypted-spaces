@@ -47,6 +47,7 @@ var encryptedSpacesStepTypes = []string{
 	"step.encrypted_space_verify_membership",
 	"step.encrypted_space_verify_operation",
 	"step.encrypted_space_verify_checkpoint",
+	"step.encrypted_space_vector_report",
 }
 
 // TypedModuleTypes implements sdk.TypedModuleProvider.
@@ -135,6 +136,14 @@ func (p *EncryptedSpacesProvider) CreateTypedStep(typeName, name string, config 
 			ExecuteEncryptedSpaceVerifyCheckpoint,
 		)
 		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_vector_report":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.VectorReportConfig{},
+			&contracts.VectorReportInput{},
+			ExecuteEncryptedSpaceVectorReport,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
 	}
 	return nil, fmt.Errorf("%w: step type %q", sdk.ErrTypedContractNotHandled, typeName)
 }
@@ -158,6 +167,7 @@ func (p *EncryptedSpacesProvider) ContractRegistry() *pb.ContractRegistry {
 			stepContract("step.encrypted_space_verify_membership", pkg+"VerifyMembershipConfig", pkg+"VerifyMembershipInput", pkg+"VerifyMembershipOutput"),
 			stepContract("step.encrypted_space_verify_operation", pkg+"VerifyOperationConfig", pkg+"VerifyOperationInput", pkg+"VerifyOperationOutput"),
 			stepContract("step.encrypted_space_verify_checkpoint", pkg+"VerifyCheckpointConfig", pkg+"VerifyCheckpointInput", pkg+"VerifyCheckpointOutput"),
+			stepContract("step.encrypted_space_vector_report", pkg+"VectorReportConfig", pkg+"VectorReportInput", pkg+"VectorReportOutput"),
 		},
 	}
 }

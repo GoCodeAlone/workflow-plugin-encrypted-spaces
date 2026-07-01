@@ -99,3 +99,79 @@ func TestProofStepsRejectFakeProductionProof(t *testing.T) {
 		t.Fatal("expected fake production proof rejection")
 	}
 }
+
+func TestVectorReportStepReturnsPerDomainCoverage(t *testing.T) {
+	result, err := ExecuteEncryptedSpaceVectorReport(context.Background(), sdk.TypedStepRequest[*contracts.VectorReportConfig, *contracts.VectorReportInput]{
+		Config: &contracts.VectorReportConfig{},
+		Input:  &contracts.VectorReportInput{},
+	})
+	if err != nil {
+		t.Fatalf("VectorReport: %v", err)
+	}
+	output := result.Output
+	if output.GetUpstreamTag() != "v0.96.4" {
+		t.Fatalf("upstream tag = %q, want v0.96.4", output.GetUpstreamTag())
+	}
+	if output.GetProductionEquivalent() {
+		t.Fatal("vector report claimed production equivalence with deferred proof domains")
+	}
+	if output.GetStatus() != "deferred" {
+		t.Fatalf("status = %q, want deferred", output.GetStatus())
+	}
+
+	rows := map[string]*contracts.VectorCoverageRow{}
+	for _, row := range output.GetRows() {
+		rows[row.GetDomain()] = row
+		switch row.GetStatus() {
+		case "vector-backed", "deterministic-only", "deferred":
+		default:
+			t.Fatalf("%s status = %q, want known coverage status", row.GetDomain(), row.GetStatus())
+		}
+	}
+	for _, domain := range []string{"zkgroup", "zkcredential", "poksho", "keytrans", "message-backup", "svr-svrb"} {
+		if rows[domain] == nil {
+			t.Fatalf("missing coverage row %s", domain)
+		}
+	}
+	if rows["zkgroup"].GetStatus() != "vector-backed" || rows["zkgroup"].GetVector() == "" {
+		t.Fatalf("zkgroup row = %#v, want vector-backed with vector", rows["zkgroup"])
+	}
+	if rows["message-backup"].GetStatus() != "deferred" || rows["message-backup"].GetReason() == "" {
+		t.Fatalf("message-backup row = %#v, want deferred with reason", rows["message-backup"])
+	}
+	if got := output.GetDeferredDomains(); len(got) != 2 || got[0] != "message-backup" || got[1] != "svr-svrb" {
+		t.Fatalf("deferred domains = %v, want message-backup and svr-svrb", got)
+	}
+}
+
+func TestVectorReportStepFiltersRequiredDomains(t *testing.T) {
+	result, err := ExecuteEncryptedSpaceVectorReport(context.Background(), sdk.TypedStepRequest[*contracts.VectorReportConfig, *contracts.VectorReportInput]{
+		Config: &contracts.VectorReportConfig{RequiredDomains: []string{"zkgroup", "poksho"}},
+		Input:  &contracts.VectorReportInput{},
+	})
+	if err != nil {
+		t.Fatalf("VectorReport filtered: %v", err)
+	}
+	if !result.Output.GetProductionEquivalent() {
+		t.Fatal("filtered vector-backed domains should be production equivalent")
+	}
+	if len(result.Output.GetRows()) != 2 {
+		t.Fatalf("rows = %d, want 2", len(result.Output.GetRows()))
+	}
+	if len(result.Output.GetDeferredDomains()) != 0 {
+		t.Fatalf("deferred domains = %v, want none", result.Output.GetDeferredDomains())
+	}
+}
+
+func TestVectorReportStepRefusesProductionEquivalenceClaimWithDeferredDomains(t *testing.T) {
+	_, err := ExecuteEncryptedSpaceVectorReport(context.Background(), sdk.TypedStepRequest[*contracts.VectorReportConfig, *contracts.VectorReportInput]{
+		Config: &contracts.VectorReportConfig{
+			RequiredDomains:              []string{"zkgroup", "message-backup"},
+			RequireProductionEquivalence: true,
+		},
+		Input: &contracts.VectorReportInput{},
+	})
+	if err == nil {
+		t.Fatal("expected production-equivalence gate to reject deferred domain")
+	}
+}

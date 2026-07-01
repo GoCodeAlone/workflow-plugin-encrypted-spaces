@@ -158,3 +158,26 @@ message VerifyCheckpointInput {
 message VerifyCheckpointOutput {
   VerificationReport report = 1;
 }
+
+message VectorReportConfig {
+  repeated string required_domains = 1;
+  bool require_production_equivalence = 2;
+}
+
+message VectorReportInput {}
+
+message VectorCoverageRow {
+  string domain = 1;
+  string status = 2;
+  string vector = 3;
+  string reason = 4;
+  string notes = 5;
+}
+
+message VectorReportOutput {
+  string upstream_tag = 1;
+  bool production_equivalent = 2;
+  repeated VectorCoverageRow rows = 3;
+  repeated string deferred_domains = 4;
+  string status = 5;
+}
