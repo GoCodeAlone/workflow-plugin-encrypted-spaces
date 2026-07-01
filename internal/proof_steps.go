@@ -96,6 +96,7 @@ func ExecuteEncryptedSpaceVectorReport(
 		Rows:                 make([]*contracts.VectorCoverageRow, 0, len(report.Rows)),
 		DeferredDomains:      []string{},
 		Status:               "production-equivalent",
+		NonVectorDomains:     []string{},
 	}
 
 	for _, row := range report.Rows {
@@ -118,7 +119,10 @@ func ExecuteEncryptedSpaceVectorReport(
 		output.Rows = append(output.Rows, contractRow)
 		if row.Status != "vector-backed" {
 			output.ProductionEquivalent = false
-			output.DeferredDomains = append(output.DeferredDomains, row.Domain)
+			output.NonVectorDomains = append(output.NonVectorDomains, row.Domain)
+			if row.Status == "deferred" {
+				output.DeferredDomains = append(output.DeferredDomains, row.Domain)
+			}
 		}
 	}
 	for domain := range required {
@@ -128,7 +132,7 @@ func ExecuteEncryptedSpaceVectorReport(
 		output.Status = "deferred"
 	}
 	if req.Config.GetRequireProductionEquivalence() && !output.ProductionEquivalent {
-		return nil, fmt.Errorf("encrypted space vector report: production equivalence requires vector-backed domains, deferred domains: %v", output.DeferredDomains)
+		return nil, fmt.Errorf("encrypted space vector report: production equivalence requires vector-backed domains, non-vector-backed domains: %v", output.NonVectorDomains)
 	}
 	return &sdk.TypedStepResult[*contracts.VectorReportOutput]{Output: output}, nil
 }

@@ -1816,6 +1816,7 @@ type VectorReportOutput struct {
 	Rows                 []*VectorCoverageRow   `protobuf:"bytes,3,rep,name=rows,proto3" json:"rows,omitempty"`
 	DeferredDomains      []string               `protobuf:"bytes,4,rep,name=deferred_domains,json=deferredDomains,proto3" json:"deferred_domains,omitempty"`
 	Status               string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	NonVectorDomains     []string               `protobuf:"bytes,6,rep,name=non_vector_domains,json=nonVectorDomains,proto3" json:"non_vector_domains,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1883,6 +1884,13 @@ func (x *VectorReportOutput) GetStatus() string {
 		return x.Status
 	}
 	return ""
+}
+
+func (x *VectorReportOutput) GetNonVectorDomains() []string {
+	if x != nil {
+		return x.NonVectorDomains
+	}
+	return nil
 }
 
 var File_internal_contracts_spaces_proto protoreflect.FileDescriptor
@@ -2015,13 +2023,14 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x16\n" +
 	"\x06vector\x18\x03 \x01(\tR\x06vector\x12\x16\n" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\x12\x14\n" +
-	"\x05notes\x18\x05 \x01(\tR\x05notes\"\xfb\x01\n" +
+	"\x05notes\x18\x05 \x01(\tR\x05notes\"\xa9\x02\n" +
 	"\x12VectorReportOutput\x12!\n" +
 	"\fupstream_tag\x18\x01 \x01(\tR\vupstreamTag\x123\n" +
 	"\x15production_equivalent\x18\x02 \x01(\bR\x14productionEquivalent\x12J\n" +
 	"\x04rows\x18\x03 \x03(\v26.workflow.plugins.encryptedspaces.v1.VectorCoverageRowR\x04rows\x12)\n" +
 	"\x10deferred_domains\x18\x04 \x03(\tR\x0fdeferredDomains\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\tR\x06statusBLZJgithub.com/GoCodeAlone/workflow-plugin-encrypted-spaces/internal/contractsb\x06proto3"
+	"\x06status\x18\x05 \x01(\tR\x06status\x12,\n" +
+	"\x12non_vector_domains\x18\x06 \x03(\tR\x10nonVectorDomainsBLZJgithub.com/GoCodeAlone/workflow-plugin-encrypted-spaces/internal/contractsb\x06proto3"
 
 var (
 	file_internal_contracts_spaces_proto_rawDescOnce sync.Once

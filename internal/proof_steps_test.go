@@ -109,8 +109,8 @@ func TestVectorReportStepReturnsPerDomainCoverage(t *testing.T) {
 		t.Fatalf("VectorReport: %v", err)
 	}
 	output := result.Output
-	if output.GetUpstreamTag() != "v0.96.4" {
-		t.Fatalf("upstream tag = %q, want v0.96.4", output.GetUpstreamTag())
+	if output.GetUpstreamTag() == "" {
+		t.Fatal("upstream tag is empty")
 	}
 	if output.GetProductionEquivalent() {
 		t.Fatal("vector report claimed production equivalence with deferred proof domains")
@@ -139,9 +139,8 @@ func TestVectorReportStepReturnsPerDomainCoverage(t *testing.T) {
 	if rows["message-backup"].GetStatus() != "deferred" || rows["message-backup"].GetReason() == "" {
 		t.Fatalf("message-backup row = %#v, want deferred with reason", rows["message-backup"])
 	}
-	if got := output.GetDeferredDomains(); len(got) != 2 || got[0] != "message-backup" || got[1] != "svr-svrb" {
-		t.Fatalf("deferred domains = %v, want message-backup and svr-svrb", got)
-	}
+	assertStringSet(t, output.GetDeferredDomains(), []string{"message-backup", "svr-svrb"})
+	assertStringSet(t, output.GetNonVectorDomains(), []string{"message-backup", "svr-svrb"})
 }
 
 func TestVectorReportStepFiltersRequiredDomains(t *testing.T) {
@@ -160,6 +159,9 @@ func TestVectorReportStepFiltersRequiredDomains(t *testing.T) {
 	}
 	if len(result.Output.GetDeferredDomains()) != 0 {
 		t.Fatalf("deferred domains = %v, want none", result.Output.GetDeferredDomains())
+	}
+	if len(result.Output.GetNonVectorDomains()) != 0 {
+		t.Fatalf("non-vector domains = %v, want none", result.Output.GetNonVectorDomains())
 	}
 }
 

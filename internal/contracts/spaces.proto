@@ -180,4 +180,5 @@ message VectorReportOutput {
   repeated VectorCoverageRow rows = 3;
   repeated string deferred_domains = 4;
   string status = 5;
+  repeated string non_vector_domains = 6;
 }
