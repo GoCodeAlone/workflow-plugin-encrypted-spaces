@@ -29,7 +29,7 @@ make install-local
 ## Capability Surface
 
 The current release exposes operation-log, epoch/member, space-state lifecycle,
-proof-report, proof-policy, verified-append, and redacted proof-evidence
+in-memory state custody, proof-report, proof-policy, verified-append, and redacted proof-evidence
 primitives backed by `encrypted-spaces-go`. It also includes a
 rooms/eventbus/audit composition scenario for private collaboration apps.
 
@@ -42,6 +42,7 @@ harnesses only. Production deployments should require proof reports whose
 - `encrypted_space.store`
 - `encrypted_space.verifier`
 - `encrypted_space.proof_policy`
+- `encrypted_space.state_store`
 
 ## Step Types
 
@@ -50,6 +51,8 @@ harnesses only. Production deployments should require proof reports whose
 - `step.encrypted_space_epoch_rotate`
 - `step.encrypted_space_member_update`
 - `step.encrypted_space_state_init`
+- `step.encrypted_space_state_load`
+- `step.encrypted_space_state_save`
 - `step.encrypted_space_state_update`
 - `step.encrypted_space_member_check`
 - `step.encrypted_space_verify_membership`
@@ -75,10 +78,13 @@ event payload shaped for `workflow-plugin-audit`; plaintext and key material are
 not copied into evidence output.
 
 `step.encrypted_space_state_init`, `step.encrypted_space_state_update`, and
-`step.encrypted_space_member_check` expose stateless `SpaceState` snapshots for
-Workflow applications that need to enroll, revoke, and check members before
-append/proof flows. The plugin does not persist these snapshots; applications
-must store them in their own state layer if restart survival is required.
+`step.encrypted_space_member_check` expose `SpaceState` snapshots for Workflow
+applications that need to enroll, revoke, and check members before append/proof
+flows. `encrypted_space.state_store` with
+`step.encrypted_space_state_load`/`step.encrypted_space_state_save` provides
+named in-memory snapshot custody for application composition and scenario
+proofs. Production deployments that need restart survival should replace or
+wrap this custody boundary with host-managed persistent storage.
 
 ## Scenarios
 

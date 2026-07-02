@@ -29,6 +29,7 @@ func TestEncryptedSpacesProviderContractsDeclareStrictScaffoldContracts(t *testi
 
 	assertStringSet(t, moduleProvider.TypedModuleTypes(), []string{
 		"encrypted_space.proof_policy",
+		"encrypted_space.state_store",
 		"encrypted_space.store",
 		"encrypted_space.verifier",
 	})
@@ -40,6 +41,8 @@ func TestEncryptedSpacesProviderContractsDeclareStrictScaffoldContracts(t *testi
 		"step.encrypted_space_member_update",
 		"step.encrypted_space_proof_evidence",
 		"step.encrypted_space_state_init",
+		"step.encrypted_space_state_load",
+		"step.encrypted_space_state_save",
 		"step.encrypted_space_state_update",
 		"step.encrypted_space_member_check",
 		"step.encrypted_space_verify_membership",
@@ -85,6 +88,7 @@ func TestEncryptedSpacesProviderContractsDeclareStrictScaffoldContracts(t *testi
 
 	for _, key := range []string{
 		"module:encrypted_space.proof_policy",
+		"module:encrypted_space.state_store",
 		"module:encrypted_space.store",
 		"module:encrypted_space.verifier",
 		"step:step.encrypted_space_append",
@@ -94,6 +98,8 @@ func TestEncryptedSpacesProviderContractsDeclareStrictScaffoldContracts(t *testi
 		"step:step.encrypted_space_member_update",
 		"step:step.encrypted_space_proof_evidence",
 		"step:step.encrypted_space_state_init",
+		"step:step.encrypted_space_state_load",
+		"step:step.encrypted_space_state_save",
 		"step:step.encrypted_space_state_update",
 		"step:step.encrypted_space_member_check",
 		"step:step.encrypted_space_verify_membership",
