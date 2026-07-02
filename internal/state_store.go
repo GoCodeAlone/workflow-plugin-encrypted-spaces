@@ -32,11 +32,10 @@ var encryptedSpaceStateStores = struct {
 }
 
 type encryptedSpaceStateStoreModule struct {
-	name        string
-	backend     string
-	maxSpaces   uint64
-	storagePath string
-	store       *encryptedSpaceStateStore
+	name      string
+	backend   string
+	maxSpaces uint64
+	store     *encryptedSpaceStateStore
 }
 
 type encryptedSpaceStateStore struct {
@@ -103,7 +102,6 @@ func newEncryptedSpaceStateStoreModuleFromConfig(name string, cfg *contracts.Sta
 	}
 	module.backend = backend
 	module.maxSpaces = cfg.GetMaxSpaces()
-	module.storagePath = cfg.GetStoragePath()
 	module.store.backend = backend
 	module.store.storagePath = cfg.GetStoragePath()
 	module.store.maxSpaces = cfg.GetMaxSpaces()
