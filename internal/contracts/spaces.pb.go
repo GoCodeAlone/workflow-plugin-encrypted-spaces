@@ -82,11 +82,14 @@ func (x *SpaceStoreConfig) GetMaxOperations() uint64 {
 }
 
 type StateStoreConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Backend       string                 `protobuf:"bytes,1,opt,name=backend,proto3" json:"backend,omitempty"`
-	MaxSpaces     uint64                 `protobuf:"varint,2,opt,name=max_spaces,json=maxSpaces,proto3" json:"max_spaces,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Backend             string                 `protobuf:"bytes,1,opt,name=backend,proto3" json:"backend,omitempty"`
+	MaxSpaces           uint64                 `protobuf:"varint,2,opt,name=max_spaces,json=maxSpaces,proto3" json:"max_spaces,omitempty"`
+	StoragePath         string                 `protobuf:"bytes,3,opt,name=storage_path,json=storagePath,proto3" json:"storage_path,omitempty"`
+	AllowFileStateStore bool                   `protobuf:"varint,4,opt,name=allow_file_state_store,json=allowFileStateStore,proto3" json:"allow_file_state_store,omitempty"`
+	PolicyMode          string                 `protobuf:"bytes,5,opt,name=policy_mode,json=policyMode,proto3" json:"policy_mode,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *StateStoreConfig) Reset() {
@@ -131,6 +134,27 @@ func (x *StateStoreConfig) GetMaxSpaces() uint64 {
 		return x.MaxSpaces
 	}
 	return 0
+}
+
+func (x *StateStoreConfig) GetStoragePath() string {
+	if x != nil {
+		return x.StoragePath
+	}
+	return ""
+}
+
+func (x *StateStoreConfig) GetAllowFileStateStore() bool {
+	if x != nil {
+		return x.AllowFileStateStore
+	}
+	return false
+}
+
+func (x *StateStoreConfig) GetPolicyMode() string {
+	if x != nil {
+		return x.PolicyMode
+	}
+	return ""
 }
 
 type VerifierConfig struct {
@@ -3170,13 +3194,14 @@ func (x *MemberCheckInput) GetMemberId() string {
 }
 
 type MemberCheckOutput struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	MemberAllowed   bool                   `protobuf:"varint,1,opt,name=member_allowed,json=memberAllowed,proto3" json:"member_allowed,omitempty"`
-	MemberRemoved   bool                   `protobuf:"varint,2,opt,name=member_removed,json=memberRemoved,proto3" json:"member_removed,omitempty"`
-	KeyEpoch        uint64                 `protobuf:"varint,3,opt,name=key_epoch,json=keyEpoch,proto3" json:"key_epoch,omitempty"`
-	MembershipEpoch uint64                 `protobuf:"varint,4,opt,name=membership_epoch,json=membershipEpoch,proto3" json:"membership_epoch,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	MemberAllowed    bool                   `protobuf:"varint,1,opt,name=member_allowed,json=memberAllowed,proto3" json:"member_allowed,omitempty"`
+	MemberRemoved    bool                   `protobuf:"varint,2,opt,name=member_removed,json=memberRemoved,proto3" json:"member_removed,omitempty"`
+	KeyEpoch         uint64                 `protobuf:"varint,3,opt,name=key_epoch,json=keyEpoch,proto3" json:"key_epoch,omitempty"`
+	MembershipEpoch  uint64                 `protobuf:"varint,4,opt,name=membership_epoch,json=membershipEpoch,proto3" json:"membership_epoch,omitempty"`
+	MembershipStatus string                 `protobuf:"bytes,5,opt,name=membership_status,json=membershipStatus,proto3" json:"membership_status,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *MemberCheckOutput) Reset() {
@@ -3235,6 +3260,13 @@ func (x *MemberCheckOutput) GetMembershipEpoch() uint64 {
 		return x.MembershipEpoch
 	}
 	return 0
+}
+
+func (x *MemberCheckOutput) GetMembershipStatus() string {
+	if x != nil {
+		return x.MembershipStatus
+	}
+	return ""
 }
 
 type StateLoadConfig struct {
@@ -3525,11 +3557,15 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"\x10SpaceStoreConfig\x12\x19\n" +
 	"\bspace_id\x18\x01 \x01(\tR\aspaceId\x12\x18\n" +
 	"\abackend\x18\x02 \x01(\tR\abackend\x12%\n" +
-	"\x0emax_operations\x18\x03 \x01(\x04R\rmaxOperations\"K\n" +
+	"\x0emax_operations\x18\x03 \x01(\x04R\rmaxOperations\"\xc4\x01\n" +
 	"\x10StateStoreConfig\x12\x18\n" +
 	"\abackend\x18\x01 \x01(\tR\abackend\x12\x1d\n" +
 	"\n" +
-	"max_spaces\x18\x02 \x01(\x04R\tmaxSpaces\"C\n" +
+	"max_spaces\x18\x02 \x01(\x04R\tmaxSpaces\x12!\n" +
+	"\fstorage_path\x18\x03 \x01(\tR\vstoragePath\x123\n" +
+	"\x16allow_file_state_store\x18\x04 \x01(\bR\x13allowFileStateStore\x12\x1f\n" +
+	"\vpolicy_mode\x18\x05 \x01(\tR\n" +
+	"policyMode\"C\n" +
 	"\x0eVerifierConfig\x12\x12\n" +
 	"\x04mode\x18\x01 \x01(\tR\x04mode\x12\x1d\n" +
 	"\n" +
@@ -3751,12 +3787,13 @@ const file_internal_contracts_spaces_proto_rawDesc = "" +
 	"\x11MemberCheckConfig\"v\n" +
 	"\x10MemberCheckInput\x12E\n" +
 	"\x05state\x18\x01 \x01(\v2/.workflow.plugins.encryptedspaces.v1.SpaceStateR\x05state\x12\x1b\n" +
-	"\tmember_id\x18\x02 \x01(\tR\bmemberId\"\xa9\x01\n" +
+	"\tmember_id\x18\x02 \x01(\tR\bmemberId\"\xd6\x01\n" +
 	"\x11MemberCheckOutput\x12%\n" +
 	"\x0emember_allowed\x18\x01 \x01(\bR\rmemberAllowed\x12%\n" +
 	"\x0emember_removed\x18\x02 \x01(\bR\rmemberRemoved\x12\x1b\n" +
 	"\tkey_epoch\x18\x03 \x01(\x04R\bkeyEpoch\x12)\n" +
-	"\x10membership_epoch\x18\x04 \x01(\x04R\x0fmembershipEpoch\"2\n" +
+	"\x10membership_epoch\x18\x04 \x01(\x04R\x0fmembershipEpoch\x12+\n" +
+	"\x11membership_status\x18\x05 \x01(\tR\x10membershipStatus\"2\n" +
 	"\x0fStateLoadConfig\x12\x1f\n" +
 	"\vstate_store\x18\x01 \x01(\tR\n" +
 	"stateStore\"+\n" +

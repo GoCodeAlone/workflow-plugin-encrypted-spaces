@@ -123,6 +123,9 @@ func TestEncryptedSpaceStateStorePersistsUpdatedSnapshot(t *testing.T) {
 	if checkRemoved.Output.MemberAllowed || !checkRemoved.Output.MemberRemoved {
 		t.Fatalf("removed member allowed=%v removed=%v, want allowed=false removed=true", checkRemoved.Output.MemberAllowed, checkRemoved.Output.MemberRemoved)
 	}
+	if checkRemoved.Output.GetMembershipStatus() != "removed" {
+		t.Fatalf("removed member status = %q, want removed", checkRemoved.Output.GetMembershipStatus())
+	}
 }
 
 func TestEncryptedSpaceStateStoreLoadMissing(t *testing.T) {
