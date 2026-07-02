@@ -1,10 +1,11 @@
 package internal
 
 import (
-	"bytes"
+	"bufio"
 	"io/fs"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -21,7 +22,7 @@ func TestScenarioProjectManifestsDeclareVersion(t *testing.T) {
 		if err != nil {
 			return err
 		}
-		if !bytes.Contains(data, []byte("version: 1\n")) {
+		if firstManifestLine(data) != "version: 1" {
 			t.Fatalf("%s must declare wfctl project manifest version: 1", path)
 		}
 		return nil
@@ -29,4 +30,16 @@ func TestScenarioProjectManifestsDeclareVersion(t *testing.T) {
 	if err != nil {
 		t.Fatalf("walk scenario manifests: %v", err)
 	}
+}
+
+func firstManifestLine(data []byte) string {
+	scanner := bufio.NewScanner(strings.NewReader(string(data)))
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		return strings.TrimSpace(strings.SplitN(line, "#", 2)[0])
+	}
+	return ""
 }
