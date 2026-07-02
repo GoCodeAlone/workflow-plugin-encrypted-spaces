@@ -27,6 +27,14 @@ message RetentionPolicy {
   uint64 min_membership_epoch = 3;
 }
 
+message SpaceState {
+  string space_id = 1;
+  uint64 key_epoch = 2;
+  uint64 membership_epoch = 3;
+  repeated string members = 4;
+  repeated string removed_members = 5;
+}
+
 message EncryptedOperation {
   string space_id = 1;
   string member_id = 2;
@@ -256,4 +264,47 @@ message VectorReportOutput {
   repeated string deferred_domains = 4;
   string status = 5;
   repeated string non_vector_domains = 6;
+}
+
+message StateInitConfig {}
+
+message StateInitInput {
+  string space_id = 1;
+  repeated string members = 2;
+  uint64 key_epoch = 3;
+  uint64 membership_epoch = 4;
+}
+
+message StateInitOutput {
+  SpaceState state = 1;
+}
+
+message StateUpdateConfig {}
+
+message StateUpdateInput {
+  SpaceState state = 1;
+  string member_id = 2;
+  string action = 3;
+  string reason = 4;
+}
+
+message StateUpdateOutput {
+  SpaceState state = 1;
+  uint64 membership_epoch = 2;
+  bool member_allowed = 3;
+  string action = 4;
+}
+
+message MemberCheckConfig {}
+
+message MemberCheckInput {
+  SpaceState state = 1;
+  string member_id = 2;
+}
+
+message MemberCheckOutput {
+  bool member_allowed = 1;
+  bool member_removed = 2;
+  uint64 key_epoch = 3;
+  uint64 membership_epoch = 4;
 }

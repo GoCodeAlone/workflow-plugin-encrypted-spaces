@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-encrypted-spaces",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "author": "GoCodeAlone",
   "description": "Workflow plugin for Encrypted Spaces collaboration primitives",
   "license": "MIT",
@@ -13,27 +13,27 @@
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.5.0/workflow-plugin-encrypted-spaces-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.5.0/workflow-plugin-encrypted-spaces-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.5.0/workflow-plugin-encrypted-spaces-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.5.0/workflow-plugin-encrypted-spaces-darwin-arm64.tar.gz"
     },
     {
       "os": "windows",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.4.0/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-encrypted-spaces/releases/download/v0.5.0/workflow-plugin-encrypted-spaces-windows-amd64.tar.gz"
     }
   ],
   "stepTypes": [
@@ -43,6 +43,9 @@
     "step.encrypted_space_epoch_rotate",
     "step.encrypted_space_member_update",
     "step.encrypted_space_proof_evidence",
+    "step.encrypted_space_state_init",
+    "step.encrypted_space_state_update",
+    "step.encrypted_space_member_check",
     "step.encrypted_space_verify_membership",
     "step.encrypted_space_verify_operation",
     "step.encrypted_space_verify_checkpoint",
@@ -62,6 +65,9 @@
       "step.encrypted_space_epoch_rotate",
       "step.encrypted_space_member_update",
       "step.encrypted_space_proof_evidence",
+      "step.encrypted_space_state_init",
+      "step.encrypted_space_state_update",
+      "step.encrypted_space_member_check",
       "step.encrypted_space_verify_membership",
       "step.encrypted_space_verify_operation",
       "step.encrypted_space_verify_checkpoint",
