@@ -37,6 +37,7 @@ if [[ -z "$WFCTL" ]]; then
     echo "workflow repo not found; set WFCTL or WORKFLOW_REPO" >&2
     exit 1
   }
+  mkdir -p "$WORKFLOW_REPO/bin"
   (cd "$WORKFLOW_REPO" && GOWORK=off go build -o bin/wfctl ./cmd/wfctl)
   WFCTL="$WORKFLOW_REPO/bin/wfctl"
 fi
