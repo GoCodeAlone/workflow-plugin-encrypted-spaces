@@ -151,6 +151,43 @@ func TestEncryptedSpaceStateStoreLoadMissing(t *testing.T) {
 	}
 }
 
+func TestEncryptedSpaceStateStoreMaxSpacesAllowsOverwriteButRejectsNewSpace(t *testing.T) {
+	module, err := newEncryptedSpaceStateStoreModuleFromConfig("scenario-state-capacity", &contracts.StateStoreConfig{MaxSpaces: 1})
+	if err != nil {
+		t.Fatalf("create state store: %v", err)
+	}
+	if err := module.Start(t.Context()); err != nil {
+		t.Fatalf("start state store: %v", err)
+	}
+	t.Cleanup(func() {
+		if err := module.Stop(t.Context()); err != nil {
+			t.Fatalf("stop state store: %v", err)
+		}
+	})
+
+	firstState := initializedStateForTest(t, "space-1", "member-1")
+	if _, err := ExecuteEncryptedSpaceStateSave(t.Context(), sdk.TypedStepRequest[*contracts.StateSaveConfig, *contracts.StateSaveInput]{
+		Config: &contracts.StateSaveConfig{StateStore: "scenario-state-capacity"},
+		Input:  &contracts.StateSaveInput{State: firstState},
+	}); err != nil {
+		t.Fatalf("save first state: %v", err)
+	}
+	if _, err := ExecuteEncryptedSpaceStateSave(t.Context(), sdk.TypedStepRequest[*contracts.StateSaveConfig, *contracts.StateSaveInput]{
+		Config: &contracts.StateSaveConfig{StateStore: "scenario-state-capacity"},
+		Input:  &contracts.StateSaveInput{State: firstState},
+	}); err != nil {
+		t.Fatalf("overwrite first state at capacity: %v", err)
+	}
+
+	secondState := initializedStateForTest(t, "space-2", "member-2")
+	if _, err := ExecuteEncryptedSpaceStateSave(t.Context(), sdk.TypedStepRequest[*contracts.StateSaveConfig, *contracts.StateSaveInput]{
+		Config: &contracts.StateSaveConfig{StateStore: "scenario-state-capacity"},
+		Input:  &contracts.StateSaveInput{State: secondState},
+	}); err == nil {
+		t.Fatal("save second state at capacity succeeded, want error")
+	}
+}
+
 func TestEncryptedSpaceStateStoreRequiresRegisteredStore(t *testing.T) {
 	initResult, err := ExecuteEncryptedSpaceStateInit(t.Context(), sdk.TypedStepRequest[*contracts.StateInitConfig, *contracts.StateInitInput]{
 		Input: &contracts.StateInitInput{SpaceId: "space-1", Members: []string{"member-1"}},
@@ -165,4 +202,15 @@ func TestEncryptedSpaceStateStoreRequiresRegisteredStore(t *testing.T) {
 	}); err == nil {
 		t.Fatal("save with missing state store succeeded, want error")
 	}
+}
+
+func initializedStateForTest(t *testing.T, spaceID, memberID string) *contracts.SpaceState {
+	t.Helper()
+	initResult, err := ExecuteEncryptedSpaceStateInit(t.Context(), sdk.TypedStepRequest[*contracts.StateInitConfig, *contracts.StateInitInput]{
+		Input: &contracts.StateInitInput{SpaceId: spaceID, Members: []string{memberID}},
+	})
+	if err != nil {
+		t.Fatalf("init state %s: %v", spaceID, err)
+	}
+	return initResult.Output.State
 }
