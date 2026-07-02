@@ -1,3 +1,4 @@
+version: 1
 name: encrypted-space-runtime
 plugins:
   - name: workflow-plugin-encrypted-spaces
