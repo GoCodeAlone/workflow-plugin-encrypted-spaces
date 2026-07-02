@@ -47,6 +47,9 @@ var encryptedSpacesStepTypes = []string{
 	"step.encrypted_space_epoch_rotate",
 	"step.encrypted_space_member_update",
 	"step.encrypted_space_proof_evidence",
+	"step.encrypted_space_state_init",
+	"step.encrypted_space_state_update",
+	"step.encrypted_space_member_check",
 	"step.encrypted_space_verify_membership",
 	"step.encrypted_space_verify_operation",
 	"step.encrypted_space_verify_checkpoint",
@@ -136,6 +139,30 @@ func (p *EncryptedSpacesProvider) CreateTypedStep(typeName, name string, config 
 			ExecuteEncryptedSpaceProofEvidence,
 		)
 		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_state_init":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.StateInitConfig{},
+			&contracts.StateInitInput{},
+			ExecuteEncryptedSpaceStateInit,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_state_update":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.StateUpdateConfig{},
+			&contracts.StateUpdateInput{},
+			ExecuteEncryptedSpaceStateUpdate,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_member_check":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.MemberCheckConfig{},
+			&contracts.MemberCheckInput{},
+			ExecuteEncryptedSpaceMemberCheck,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
 	case "step.encrypted_space_verify_membership":
 		factory := sdk.NewTypedStepFactory(
 			typeName,
@@ -191,6 +218,9 @@ func (p *EncryptedSpacesProvider) ContractRegistry() *pb.ContractRegistry {
 			stepContract("step.encrypted_space_epoch_rotate", pkg+"EpochRotateConfig", pkg+"EpochRotateInput", pkg+"EpochRotateOutput"),
 			stepContract("step.encrypted_space_member_update", pkg+"MemberUpdateConfig", pkg+"MemberUpdateInput", pkg+"MemberUpdateOutput"),
 			stepContract("step.encrypted_space_proof_evidence", pkg+"ProofEvidenceConfig", pkg+"ProofEvidenceInput", pkg+"ProofEvidenceOutput"),
+			stepContract("step.encrypted_space_state_init", pkg+"StateInitConfig", pkg+"StateInitInput", pkg+"StateInitOutput"),
+			stepContract("step.encrypted_space_state_update", pkg+"StateUpdateConfig", pkg+"StateUpdateInput", pkg+"StateUpdateOutput"),
+			stepContract("step.encrypted_space_member_check", pkg+"MemberCheckConfig", pkg+"MemberCheckInput", pkg+"MemberCheckOutput"),
 			stepContract("step.encrypted_space_verify_membership", pkg+"VerifyMembershipConfig", pkg+"VerifyMembershipInput", pkg+"VerifyMembershipOutput"),
 			stepContract("step.encrypted_space_verify_operation", pkg+"VerifyOperationConfig", pkg+"VerifyOperationInput", pkg+"VerifyOperationOutput"),
 			stepContract("step.encrypted_space_verify_checkpoint", pkg+"VerifyCheckpointConfig", pkg+"VerifyCheckpointInput", pkg+"VerifyCheckpointOutput"),

@@ -15,6 +15,16 @@ find_workflow_repo() {
   local candidate
   for candidate in "$ROOT/../workflow" "$ROOT/../../../workflow"; do
     if [[ -d "$candidate" ]]; then
+      local main_sha worktree
+      main_sha="$(git -C "$candidate" rev-parse --verify origin/main 2>/dev/null || true)"
+      if [[ -n "$main_sha" ]]; then
+        while IFS= read -r worktree; do
+          if [[ -d "$worktree" ]] && [[ "$(git -C "$worktree" rev-parse HEAD 2>/dev/null || true)" == "$main_sha" ]]; then
+            printf '%s\n' "$worktree"
+            return 0
+          fi
+        done < <(git -C "$candidate" worktree list --porcelain 2>/dev/null | awk '/^worktree / {print substr($0, 10)}')
+      fi
       printf '%s\n' "$candidate"
       return 0
     fi
@@ -27,12 +37,9 @@ if [[ -z "$WFCTL" ]]; then
     echo "workflow repo not found; set WFCTL or WORKFLOW_REPO" >&2
     exit 1
   }
-  if [[ -x "$WORKFLOW_REPO/bin/wfctl" ]]; then
-    WFCTL="$WORKFLOW_REPO/bin/wfctl"
-  else
-    (cd "$WORKFLOW_REPO" && GOWORK=off go build -o bin/wfctl ./cmd/wfctl)
-    WFCTL="$WORKFLOW_REPO/bin/wfctl"
-  fi
+  mkdir -p "$WORKFLOW_REPO/bin"
+  (cd "$WORKFLOW_REPO" && GOWORK=off go build -o bin/wfctl ./cmd/wfctl)
+  WFCTL="$WORKFLOW_REPO/bin/wfctl"
 fi
 
 rm -rf "$PLUGIN_DIR/$PLUGIN_NAME"

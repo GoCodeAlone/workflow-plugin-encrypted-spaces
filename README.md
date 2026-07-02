@@ -28,10 +28,10 @@ make install-local
 
 ## Capability Surface
 
-The current release exposes operation-log, epoch/member, proof-report,
-proof-policy, verified-append, and redacted proof-evidence primitives backed by
-`encrypted-spaces-go`. It also includes a rooms/eventbus/audit composition
-scenario for private collaboration apps.
+The current release exposes operation-log, epoch/member, space-state lifecycle,
+proof-report, proof-policy, verified-append, and redacted proof-evidence
+primitives backed by `encrypted-spaces-go`. It also includes a
+rooms/eventbus/audit composition scenario for private collaboration apps.
 
 Fake/no-proof modes are for application composition tests and conformance
 harnesses only. Production deployments should require proof reports whose
@@ -49,6 +49,9 @@ harnesses only. Production deployments should require proof reports whose
 - `step.encrypted_space_fast_forward`
 - `step.encrypted_space_epoch_rotate`
 - `step.encrypted_space_member_update`
+- `step.encrypted_space_state_init`
+- `step.encrypted_space_state_update`
+- `step.encrypted_space_member_check`
 - `step.encrypted_space_verify_membership`
 - `step.encrypted_space_verify_operation`
 - `step.encrypted_space_verify_checkpoint`
@@ -70,6 +73,12 @@ upstream vectors are available.
 `step.encrypted_space_proof_evidence` emits redacted proof evidence and an audit
 event payload shaped for `workflow-plugin-audit`; plaintext and key material are
 not copied into evidence output.
+
+`step.encrypted_space_state_init`, `step.encrypted_space_state_update`, and
+`step.encrypted_space_member_check` expose stateless `SpaceState` snapshots for
+Workflow applications that need to enroll, revoke, and check members before
+append/proof flows. The plugin does not persist these snapshots; applications
+must store them in their own state layer if restart survival is required.
 
 ## Scenarios
 
