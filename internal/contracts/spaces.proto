@@ -13,6 +13,9 @@ message SpaceStoreConfig {
 message StateStoreConfig {
   string backend = 1;
   uint64 max_spaces = 2;
+  string storage_path = 3;
+  bool allow_file_state_store = 4;
+  string policy_mode = 5;
 }
 
 message VerifierConfig {
@@ -312,6 +315,7 @@ message MemberCheckOutput {
   bool member_removed = 2;
   uint64 key_epoch = 3;
   uint64 membership_epoch = 4;
+  string membership_status = 5;
 }
 
 message StateLoadConfig {

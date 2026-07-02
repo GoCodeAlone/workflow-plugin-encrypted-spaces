@@ -2,6 +2,9 @@ package internal
 
 import (
 	"context"
+	"encoding/json"
+	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/GoCodeAlone/workflow/plugin/external/sdk"
@@ -79,5 +82,88 @@ func TestEncryptedSpaceRuntimeScenario(t *testing.T) {
 	}
 	if got := vectorReport.Output.GetStatus(); got != "deferred" {
 		t.Fatalf("runtime scenario vector status = %q, want deferred", got)
+	}
+}
+
+func TestEncryptedSpaceFileStateRuntimeScenario(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "spaces.json")
+	first, err := newEncryptedSpaceStateStoreModuleFromConfig("runtime-file-state", &contracts.StateStoreConfig{
+		Backend:             "file",
+		StoragePath:         path,
+		AllowFileStateStore: true,
+	})
+	if err != nil {
+		t.Fatalf("new file state store: %v", err)
+	}
+	if err := first.Start(t.Context()); err != nil {
+		t.Fatalf("start file state store: %v", err)
+	}
+
+	state := initializedStateForTest(t, "runtime-space", "member-a")
+	update, err := ExecuteEncryptedSpaceStateUpdate(t.Context(), sdk.TypedStepRequest[*contracts.StateUpdateConfig, *contracts.StateUpdateInput]{
+		Input: &contracts.StateUpdateInput{
+			State:    state,
+			MemberId: "member-a",
+			Action:   "remove",
+			Reason:   "runtime scenario removal",
+		},
+	})
+	if err != nil {
+		t.Fatalf("remove member: %v", err)
+	}
+	save, err := ExecuteEncryptedSpaceStateSave(t.Context(), sdk.TypedStepRequest[*contracts.StateSaveConfig, *contracts.StateSaveInput]{
+		Config: &contracts.StateSaveConfig{StateStore: "runtime-file-state"},
+		Input:  &contracts.StateSaveInput{State: update.Output.GetState()},
+	})
+	if err != nil {
+		t.Fatalf("save removed state: %v", err)
+	}
+	if err := first.Stop(t.Context()); err != nil {
+		t.Fatalf("stop first store: %v", err)
+	}
+
+	second, err := newEncryptedSpaceStateStoreModuleFromConfig("runtime-file-state", &contracts.StateStoreConfig{
+		Backend:             "file",
+		StoragePath:         path,
+		AllowFileStateStore: true,
+	})
+	if err != nil {
+		t.Fatalf("new restarted store: %v", err)
+	}
+	if err := second.Start(t.Context()); err != nil {
+		t.Fatalf("start restarted store: %v", err)
+	}
+	t.Cleanup(func() {
+		_ = second.Stop(t.Context())
+	})
+	load, err := ExecuteEncryptedSpaceStateLoad(t.Context(), sdk.TypedStepRequest[*contracts.StateLoadConfig, *contracts.StateLoadInput]{
+		Config: &contracts.StateLoadConfig{StateStore: "runtime-file-state"},
+		Input:  &contracts.StateLoadInput{SpaceId: "runtime-space"},
+	})
+	if err != nil {
+		t.Fatalf("load restarted state: %v", err)
+	}
+	check, err := ExecuteEncryptedSpaceMemberCheck(t.Context(), sdk.TypedStepRequest[*contracts.MemberCheckConfig, *contracts.MemberCheckInput]{
+		Input: &contracts.MemberCheckInput{
+			State:    load.Output.GetState(),
+			MemberId: "member-a",
+		},
+	})
+	if err != nil {
+		t.Fatalf("check restarted removed member: %v", err)
+	}
+	if check.Output.GetMemberAllowed() || !check.Output.GetMemberRemoved() {
+		t.Fatalf("removed member allowed=%v removed=%v, want allowed=false removed=true", check.Output.GetMemberAllowed(), check.Output.GetMemberRemoved())
+	}
+
+	raw, err := json.Marshal([]any{save.Output, load.Output, check.Output})
+	if err != nil {
+		t.Fatalf("marshal runtime outputs: %v", err)
+	}
+	outputs := strings.ToLower(string(raw))
+	for _, forbidden := range []string{"plaintext", "proof-secret", "private-key", "key material"} {
+		if strings.Contains(outputs, forbidden) {
+			t.Fatalf("runtime outputs leaked forbidden term %q: %s", forbidden, outputs)
+		}
 	}
 }

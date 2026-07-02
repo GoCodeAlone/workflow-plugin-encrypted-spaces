@@ -1,0 +1,81 @@
+plugins:
+  external:
+    - name: workflow-plugin-encrypted-spaces
+
+modules:
+  - name: file_state
+    type: encrypted_space.state_store
+    config:
+      backend: file
+      storage_path: .wfctl/encrypted-space-file-state.json
+      allow_file_state_store: true
+      max_spaces: 8
+
+pipelines:
+  file_state_restart:
+    steps:
+      - name: init_input
+        type: step.set
+        config:
+          values:
+            space_id: "{{ .space_id }}"
+            members:
+              - "{{ .member_a }}"
+              - "{{ .member_b }}"
+      - name: init
+        type: step.encrypted_space_state_init
+      - name: save_initial
+        type: step.encrypted_space_state_save
+        config:
+          state_store: file_state
+      - name: remove_input
+        type: step.set
+        config:
+          values:
+            state:
+              space_id: "{{ index .steps \"save_initial\" \"state\" \"space_id\" }}"
+              key_epoch: "{{ index .steps \"save_initial\" \"state\" \"key_epoch\" }}"
+              membership_epoch: "{{ index .steps \"save_initial\" \"state\" \"membership_epoch\" }}"
+              members:
+                - "{{ .member_a }}"
+                - "{{ .member_b }}"
+              removed_members: []
+            member_id: "{{ .member_b }}"
+            action: remove
+            reason: file-state-restart-proof
+      - name: remove_member
+        type: step.encrypted_space_state_update
+      - name: save_removed
+        type: step.encrypted_space_state_save
+        config:
+          state_store: file_state
+      - name: load_input
+        type: step.set
+        config:
+          values:
+            space_id: "{{ .space_id }}"
+      - name: load_after_save
+        type: step.encrypted_space_state_load
+        config:
+          state_store: file_state
+      - name: check_removed_input
+        type: step.set
+        config:
+          values:
+            state:
+              space_id: "{{ index .steps \"load_after_save\" \"state\" \"space_id\" }}"
+              key_epoch: "{{ index .steps \"load_after_save\" \"state\" \"key_epoch\" }}"
+              membership_epoch: "{{ index .steps \"load_after_save\" \"state\" \"membership_epoch\" }}"
+              members:
+                - "{{ .member_a }}"
+              removed_members:
+                - "{{ .member_b }}"
+            member_id: "{{ .member_b }}"
+      - name: check_removed
+        type: step.encrypted_space_member_check
+      - name: check_summary
+        type: step.set
+        config:
+          values:
+            member_removed: "{{ index .steps \"check_removed\" \"member_removed\" }}"
+    on_error: stop

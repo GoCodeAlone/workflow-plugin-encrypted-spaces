@@ -29,8 +29,9 @@ make install-local
 ## Capability Surface
 
 The current release exposes operation-log, epoch/member, space-state lifecycle,
-in-memory state custody, proof-report, proof-policy, verified-append, and redacted proof-evidence
-primitives backed by `encrypted-spaces-go`. It also includes a
+memory and explicit file-backed state custody, proof-report, proof-policy,
+verified-append, and redacted proof-evidence primitives backed by
+`encrypted-spaces-go`. It also includes a
 rooms/eventbus/audit composition scenario for private collaboration apps.
 
 Fake/no-proof modes are for application composition tests and conformance
@@ -82,15 +83,23 @@ not copied into evidence output.
 applications that need to enroll, revoke, and check members before append/proof
 flows. `encrypted_space.state_store` with
 `step.encrypted_space_state_load`/`step.encrypted_space_state_save` provides
-named in-memory snapshot custody for application composition and scenario
-proofs. Production deployments that need restart survival should replace or
-wrap this custody boundary with host-managed persistent storage.
+named snapshot custody for application composition and scenario proofs. The
+default `memory` backend is ephemeral. The explicit `file` backend writes a
+schema-versioned and checksummed state snapshot through a temp-file plus rename
+sequence, rejects corrupt or unsupported snapshots on start, and stores only
+space IDs, epochs, members, and removed members. It does not store plaintext,
+proof secrets, private keys, ciphertext bodies, or operation-log payloads.
+Production policy mode rejects the local `file` backend; production hosts
+should bind this contract to their managed storage boundary.
 
 ## Scenarios
 
 - `scenarios/encrypted-space-proof-workflow`: local proof-gated append flow that
   composes this plugin with released `workflow-plugin-rooms`,
   `workflow-plugin-eventbus`, and `workflow-plugin-audit` pins.
+- `testdata/pipelines/encrypted-space-file-state.yaml`: local file-state
+  workflow fixture that initializes a caller-supplied space, saves state,
+  reloads it, and rejects a removed member.
 
 ## Module
 

@@ -91,12 +91,22 @@ func ExecuteEncryptedSpaceMemberCheck(
 	}
 	memberID := operationlog.MemberID(req.Input.GetMemberId())
 	snapshot := state.Snapshot()
+	memberAllowed := state.AllowsMember(memberID)
+	memberRemoved := slices.Contains(snapshot.RemovedMembers, memberID)
+	membershipStatus := "denied"
+	switch {
+	case memberAllowed:
+		membershipStatus = "allowed"
+	case memberRemoved:
+		membershipStatus = "removed"
+	}
 	return &sdk.TypedStepResult[*contracts.MemberCheckOutput]{
 		Output: &contracts.MemberCheckOutput{
-			MemberAllowed:   state.AllowsMember(memberID),
-			MemberRemoved:   slices.Contains(snapshot.RemovedMembers, memberID),
-			KeyEpoch:        uint64(snapshot.KeyEpoch),
-			MembershipEpoch: uint64(snapshot.MembershipEpoch),
+			MemberAllowed:    memberAllowed,
+			MemberRemoved:    memberRemoved,
+			KeyEpoch:         uint64(snapshot.KeyEpoch),
+			MembershipEpoch:  uint64(snapshot.MembershipEpoch),
+			MembershipStatus: membershipStatus,
 		},
 	}, nil
 }
