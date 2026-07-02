@@ -1,3 +1,4 @@
+version: 1
 name: encrypted-space-proof-workflow
 plugins:
   - name: workflow-plugin-rooms
