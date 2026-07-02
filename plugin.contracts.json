@@ -7,6 +7,12 @@
       "type": "encrypted_space.proof_policy"
     },
     {
+      "config": "workflow.plugins.encryptedspaces.v1.StateStoreConfig",
+      "kind": "module",
+      "mode": "strict",
+      "type": "encrypted_space.state_store"
+    },
+    {
       "config": "workflow.plugins.encryptedspaces.v1.SpaceStoreConfig",
       "kind": "module",
       "mode": "strict",
@@ -73,6 +79,22 @@
       "mode": "strict",
       "output": "workflow.plugins.encryptedspaces.v1.StateInitOutput",
       "type": "step.encrypted_space_state_init"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.StateLoadConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.StateLoadInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.StateLoadOutput",
+      "type": "step.encrypted_space_state_load"
+    },
+    {
+      "config": "workflow.plugins.encryptedspaces.v1.StateSaveConfig",
+      "input": "workflow.plugins.encryptedspaces.v1.StateSaveInput",
+      "kind": "step",
+      "mode": "strict",
+      "output": "workflow.plugins.encryptedspaces.v1.StateSaveOutput",
+      "type": "step.encrypted_space_state_save"
     },
     {
       "config": "workflow.plugins.encryptedspaces.v1.StateUpdateConfig",

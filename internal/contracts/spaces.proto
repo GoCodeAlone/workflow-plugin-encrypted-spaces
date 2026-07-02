@@ -10,6 +10,11 @@ message SpaceStoreConfig {
   uint64 max_operations = 3;
 }
 
+message StateStoreConfig {
+  string backend = 1;
+  uint64 max_spaces = 2;
+}
+
 message VerifierConfig {
   string mode = 1;
   bool allow_fake = 2;
@@ -307,4 +312,30 @@ message MemberCheckOutput {
   bool member_removed = 2;
   uint64 key_epoch = 3;
   uint64 membership_epoch = 4;
+}
+
+message StateLoadConfig {
+  string state_store = 1;
+}
+
+message StateLoadInput {
+  string space_id = 1;
+}
+
+message StateLoadOutput {
+  SpaceState state = 1;
+  bool found = 2;
+}
+
+message StateSaveConfig {
+  string state_store = 1;
+}
+
+message StateSaveInput {
+  SpaceState state = 1;
+}
+
+message StateSaveOutput {
+  SpaceState state = 1;
+  bool stored = 2;
 }

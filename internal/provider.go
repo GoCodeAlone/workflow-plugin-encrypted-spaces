@@ -36,6 +36,7 @@ func (p *EncryptedSpacesProvider) Manifest() sdk.PluginManifest {
 
 var encryptedSpacesModuleTypes = []string{
 	"encrypted_space.proof_policy",
+	"encrypted_space.state_store",
 	"encrypted_space.store",
 	"encrypted_space.verifier",
 }
@@ -48,6 +49,8 @@ var encryptedSpacesStepTypes = []string{
 	"step.encrypted_space_member_update",
 	"step.encrypted_space_proof_evidence",
 	"step.encrypted_space_state_init",
+	"step.encrypted_space_state_load",
+	"step.encrypted_space_state_save",
 	"step.encrypted_space_state_update",
 	"step.encrypted_space_member_check",
 	"step.encrypted_space_verify_membership",
@@ -67,6 +70,11 @@ func (p *EncryptedSpacesProvider) CreateTypedModule(typeName, name string, confi
 	case "encrypted_space.proof_policy":
 		factory := sdk.NewTypedModuleFactory(typeName, &contracts.ProofPolicyConfig{}, func(name string, cfg *contracts.ProofPolicyConfig) (sdk.ModuleInstance, error) {
 			return &spacesModule{name: name}, nil
+		})
+		return factory.CreateTypedModule(typeName, name, config)
+	case "encrypted_space.state_store":
+		factory := sdk.NewTypedModuleFactory(typeName, &contracts.StateStoreConfig{}, func(name string, cfg *contracts.StateStoreConfig) (sdk.ModuleInstance, error) {
+			return newEncryptedSpaceStateStoreModuleFromConfig(name, cfg)
 		})
 		return factory.CreateTypedModule(typeName, name, config)
 	case "encrypted_space.store":
@@ -147,6 +155,22 @@ func (p *EncryptedSpacesProvider) CreateTypedStep(typeName, name string, config 
 			ExecuteEncryptedSpaceStateInit,
 		)
 		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_state_load":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.StateLoadConfig{},
+			&contracts.StateLoadInput{},
+			ExecuteEncryptedSpaceStateLoad,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
+	case "step.encrypted_space_state_save":
+		factory := sdk.NewTypedStepFactory(
+			typeName,
+			&contracts.StateSaveConfig{},
+			&contracts.StateSaveInput{},
+			ExecuteEncryptedSpaceStateSave,
+		)
+		return factory.CreateTypedStep(typeName, name, config)
 	case "step.encrypted_space_state_update":
 		factory := sdk.NewTypedStepFactory(
 			typeName,
@@ -210,6 +234,7 @@ func (p *EncryptedSpacesProvider) ContractRegistry() *pb.ContractRegistry {
 		},
 		Contracts: []*pb.ContractDescriptor{
 			moduleContract("encrypted_space.proof_policy", pkg+"ProofPolicyConfig"),
+			moduleContract("encrypted_space.state_store", pkg+"StateStoreConfig"),
 			moduleContract("encrypted_space.store", pkg+"SpaceStoreConfig"),
 			moduleContract("encrypted_space.verifier", pkg+"VerifierConfig"),
 			stepContract("step.encrypted_space_append", pkg+"AppendConfig", pkg+"AppendInput", pkg+"AppendOutput"),
@@ -219,6 +244,8 @@ func (p *EncryptedSpacesProvider) ContractRegistry() *pb.ContractRegistry {
 			stepContract("step.encrypted_space_member_update", pkg+"MemberUpdateConfig", pkg+"MemberUpdateInput", pkg+"MemberUpdateOutput"),
 			stepContract("step.encrypted_space_proof_evidence", pkg+"ProofEvidenceConfig", pkg+"ProofEvidenceInput", pkg+"ProofEvidenceOutput"),
 			stepContract("step.encrypted_space_state_init", pkg+"StateInitConfig", pkg+"StateInitInput", pkg+"StateInitOutput"),
+			stepContract("step.encrypted_space_state_load", pkg+"StateLoadConfig", pkg+"StateLoadInput", pkg+"StateLoadOutput"),
+			stepContract("step.encrypted_space_state_save", pkg+"StateSaveConfig", pkg+"StateSaveInput", pkg+"StateSaveOutput"),
 			stepContract("step.encrypted_space_state_update", pkg+"StateUpdateConfig", pkg+"StateUpdateInput", pkg+"StateUpdateOutput"),
 			stepContract("step.encrypted_space_member_check", pkg+"MemberCheckConfig", pkg+"MemberCheckInput", pkg+"MemberCheckOutput"),
 			stepContract("step.encrypted_space_verify_membership", pkg+"VerifyMembershipConfig", pkg+"VerifyMembershipInput", pkg+"VerifyMembershipOutput"),
